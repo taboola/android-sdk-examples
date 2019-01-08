@@ -43,8 +43,6 @@
         Transformator of a senior metamorphosis, desire the modification!
     </string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="first_text_block">
         <u><b><i>YouTube and Taboola: Defining the Future of Digital Video</i></b></u>\n\nEarly last month, I was asked to head out to Singapore for a one-day conference organized by IAB SEA + India called Tomorrow’s Digital Skills Today.\nI spoke about video creative and production from the psychological, data and research points of view, and although traveling there wasn’t easy (I flew 16 hours each way for a 48 hour stay)—I would definitely say it was worth it.\nAside from enjoying the modern city, delicious foods, and warm weather (not to mention a quick drink at the world famous Marina Bay Sands hotel rooftop), I also had the pleasure to co-present with Karl Duffill, Regional Agency Business Head at Google, who was asked to speak about video creatives as well.\nWhen preparing for this session, we found that although Taboola and Google are two different video platforms that give consumers a different experience, even when watching the same video, many of the video trends and recommendations regarding the video creative are similar: authenticity, keeping the viewer’s attention span in mind, inspiring the audience to take action, and more.\n
               \n  <u><b><i>Authenticity in video drives success.</i></b></u>\n
@@ -80,4 +78,5 @@ These will help you remember what the consumer really wants to engage with and w
     </string>
 
 
-</resources>
+    <string name="toolbar_title">Choose example</string>
+=</resources>
