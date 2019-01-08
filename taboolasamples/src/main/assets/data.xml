@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<demos>
+    <demo>
+        <name>Mid Widget With Feed JS</name>
+        <className>MidWidgetWithFeedJsFragment</className>
+    </demo>
+    <demo>
+        <name>Split Feed JS</name>
+        <className>SplitFeedJsFragment</className>
+    </demo>
+    <demo>
+        <name>Widget Api</name>
+        <className>WidgetApiFragment</className>
+    </demo>
+    <demo>
+        <name>Feed Api</name>
+        <className>FeedApiFragment</className>
+    </demo>
+</demos>

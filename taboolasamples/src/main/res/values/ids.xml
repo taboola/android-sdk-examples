@@ -1,0 +1,14 @@
+<resources>
+    <item name="api_view_thumbnail" type="id" />
+    <item name="api_view_title" type="id" />
+    <item name="api_view_branding" type="id" />
+    <item name="api_view_description" type="id" />
+
+
+    <item name="api_4_items_widget" type="id" />
+    <item name="api_feed" type="id" />
+    <item name="js_split" type="id" />
+    <item name="js_mid_article_with_feed" type="id" />
+
+
+</resources>
