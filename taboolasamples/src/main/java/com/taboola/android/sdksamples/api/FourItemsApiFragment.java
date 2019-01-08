@@ -3,7 +3,6 @@ package com.taboola.android.sdksamples.api;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,9 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
 import com.taboola.android.api.TBPlacement;
 import com.taboola.android.api.TBPlacementRequest;
@@ -32,9 +29,6 @@ public class FourItemsApiFragment extends Fragment {
     private static final String TAG = FourItemsApiFragment.class.getSimpleName();
     private LinearLayout adContainer;
     private View attributionView;
-    private Handler handler = new Handler();
-    private ProgressBar progressBar;
-
 
     public FourItemsApiFragment() {
         // Required empty public constructor
@@ -56,7 +50,6 @@ public class FourItemsApiFragment extends Fragment {
         initTaboolaApi();
 
         adContainer = view.findViewById(R.id.ad_container);
-        progressBar = view.findViewById(R.id.progress_bar);
 
         attributionView = view.findViewById(R.id.attribution_view);
         attributionView.setOnClickListener(v -> TaboolaApi.getInstance().handleAttributionClick(getContext()));
@@ -93,37 +86,6 @@ public class FourItemsApiFragment extends Fragment {
                 Log.d(TAG, "Failed: " + throwable.getMessage());
             }
         });
-
-        setProgressBar();
-    }
-
-    private void setProgressBar() {
-        // Start long running operation in a background thread
-        new Thread(new Runnable() {
-            int progressStatus = 0;
-
-            public void run() {
-                while (progressStatus < 100) {
-                    progressStatus += 1;
-                    // Update the progress bar
-                    handler.post(new Runnable() {
-                        public void run() {
-                            progressBar.setProgress(progressStatus);
-                        }
-                    });
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                // Animate the disappearance of the progress bar
-                progressBar.animate().scaleY(0f).alpha(0f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(250);
-
-            }
-        }).start();
-
-
     }
 
     /**

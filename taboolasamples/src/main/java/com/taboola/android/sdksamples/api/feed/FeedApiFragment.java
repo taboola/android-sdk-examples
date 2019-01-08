@@ -107,8 +107,10 @@ public class FeedApiFragment extends Fragment {
 
             @Override
             public void onRecommendationsFailed(Throwable throwable) {
-                Toast.makeText(getActivity(), "Fetch failed: " + throwable.getMessage(),
-                        Toast.LENGTH_LONG).show();
+                if (getContext() != null) {
+                    Toast.makeText(getContext(), "Fetch failed: " + throwable.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                }
                 snackbar.dismiss();
             }
         });
@@ -124,8 +126,10 @@ public class FeedApiFragment extends Fragment {
 
             @Override
             public void onRecommendationsFailed(Throwable throwable) {
-                Toast.makeText(getActivity(), "Fetch failed: " + throwable.getMessage(),
-                        Toast.LENGTH_LONG).show();
+                if (getContext() != null) {
+                    Toast.makeText(getContext(), "Fetch failed: " + throwable.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -135,9 +139,6 @@ public class FeedApiFragment extends Fragment {
         mPlacement = placement;
         int currentSize = mAdapter.getItemCount();
 
-        /*if (currentSize == 0) { // First item in the list is a string, used to mimic an article
-            mData.add(getString(R.string.lorem_ipsum_short));
-        }*/
         if (currentSize == 1) { // The seconds item in the list is the attribution view
             mData.add(new FeedAdapter.HeaderItem(R.drawable.icon_attribution, getString(R.string.attribution_view_text)));
         }
