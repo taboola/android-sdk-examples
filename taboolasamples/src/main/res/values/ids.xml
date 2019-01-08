@@ -9,6 +9,7 @@
     <item name="api_feed" type="id" />
     <item name="js_split" type="id" />
     <item name="js_mid_article_with_feed" type="id" />
+    <item name="std_mid_article_with_feed_lnr" type="id" />
 
 
 </resources>

@@ -18,6 +18,7 @@ import com.taboola.android.sdksamples.api.FourItemsApiFragment;
 import com.taboola.android.sdksamples.api.feed.FeedApiFragment;
 import com.taboola.android.sdksamples.js.MidWidgetWithFeedJsFragment;
 import com.taboola.android.sdksamples.js.SplitFeedJsFragment;
+import com.taboola.android.sdksamples.standard.FeedWithMiddleArticleInsideScrollViewFragment;
 
 public class MenuFragment extends Fragment implements View.OnClickListener {
 
@@ -52,6 +53,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         mViewGroup = view.findViewById(R.id.main_menu_lyt);
         addHeader("Sdk Standard");
+        addButton("Mid Widget With Feed inside ScrollView", R.id.std_mid_article_with_feed_lnr);
         // TODO: 08/01/2019 add std screens
         addHeader("Sdk Js");
         addButton("Mid Widget With Feed ", R.id.js_mid_article_with_feed);
@@ -84,6 +86,9 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
                 openFragment(new MidWidgetWithFeedJsFragment(), screenName);
                 break;
 
+            case R.id.std_mid_article_with_feed_lnr:
+                openFragment(new FeedWithMiddleArticleInsideScrollViewFragment(), screenName);
+                break;
         }
     }
 
