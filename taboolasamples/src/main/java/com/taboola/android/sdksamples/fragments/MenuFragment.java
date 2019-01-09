@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,13 +53,13 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mViewGroup = view.findViewById(R.id.main_menu_lyt);
-        addHeader("Sdk Standard");
+        addHeader("sdk standard");
         addButton("Mid Widget With Feed inside ScrollView", R.id.std_mid_article_with_feed_lnr);
         // TODO: 08/01/2019 add std screens
-        addHeader("Sdk Js");
+        addHeader("sdk js");
         addButton("Mid Widget With Feed ", R.id.js_mid_article_with_feed);
         addButton("Split Feed", R.id.js_split);
-        addHeader("Sdk Api");
+        addHeader("sdk api");
         addButton("Widget With 4 items", R.id.api_4_items_widget);
         addButton("Feed", R.id.api_feed);
     }
@@ -102,20 +103,25 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         Context context = mViewGroup.getContext();
         TextView textView = (TextView) LayoutInflater.from(context).inflate(R.layout.menu_header_item,
                 mViewGroup, false);
-
-        textView.setTypeface(Typeface.MONOSPACE);
         textView.setText(title);
         mViewGroup.addView(textView);
     }
 
     private void addButton(String screenName, int id) {
         Context context = mViewGroup.getContext();
-        Button button = (Button) LayoutInflater.from(context).inflate(R.layout.button_item, mViewGroup, false);
+        /*Button button = (Button) LayoutInflater.from(context).inflate(R.layout.button_item, mViewGroup, false);
         button.setText(screenName);
         button.setTag(screenName);
         button.setId(id);
-        button.setOnClickListener(this);
-        mViewGroup.addView(button);
+        button.setOnClickListener(this);*/
+
+        TextView textView = (TextView) LayoutInflater.from(context).inflate(R.layout.button_item, mViewGroup, false);
+        textView.setText(screenName);
+        textView.setTag(screenName);
+        textView.setId(id);
+        textView.setOnClickListener(this);
+
+        mViewGroup.addView(textView);
     }
 
     public interface OnFragmentInteractionListener {

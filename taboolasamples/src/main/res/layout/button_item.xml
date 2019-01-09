@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.AppCompatButton xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<!--
+<android.support.v7.widget.AppCompatButton xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginBottom="10dp"
-    android:background="@drawable/rounded_shape"
+    android:layout_marginLeft="20dp"
+    android:paddingBottom="10dp"
     android:textColor="@android:color/white"
     android:textSize="14sp"
     android:textStyle="bold"
-    android:typeface="sans"
-    tools:text="Some Button Test" />
+    android:textAllCaps="false"
+    android:gravity="left|center"
+    tools:text="Some Button Test"
+    android:fontFamily="sans-serif"
+    app:fontFamily="sans-serif" />
+-->
 
+    <android.support.v7.widget.AppCompatButton xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="8dp"
+    android:textColor="@android:color/white"
+    android:textSize="14sp"
+    tools:text="Some Button Test"
+    android:fontFamily="sans-serif"
+    app:fontFamily="sans-serif"
+    android:layout_marginLeft="10dp"/>

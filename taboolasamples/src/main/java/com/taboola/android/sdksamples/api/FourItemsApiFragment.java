@@ -24,6 +24,11 @@ import com.taboola.android.sdksamples.R;
 
 import java.util.Map;
 
+/**
+ * The initialization of TaboolaAPI is done in the Application class
+ * If your project does not have an Application extending class, create one and then init TaboolaApi
+ */
+
 public class FourItemsApiFragment extends Fragment {
 
     private static final String TAG = FourItemsApiFragment.class.getSimpleName();
@@ -46,8 +51,6 @@ public class FourItemsApiFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        initTaboolaApi();
 
         adContainer = view.findViewById(R.id.ad_container);
 
@@ -123,11 +126,5 @@ public class FourItemsApiFragment extends Fragment {
                 adContainer.addView(v);
             }
         }
-    }
-
-    private void initTaboolaApi() {
-        TaboolaApi.getInstance().init(getContext().getApplicationContext(),
-                "sdk-tester",
-                "d39df1418f5a4819c9eae2ca02595d57de98c246");
     }
 }

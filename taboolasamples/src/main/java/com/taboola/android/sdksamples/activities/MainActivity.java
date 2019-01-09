@@ -22,8 +22,10 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.OnFr
 
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setLogo(R.drawable.ic_taboola);
         resetToolbarTitle();
 
+        // Code to handle toolbar title and back arrow
         onBackStackChangedListener = () -> {
             int lastBackStackEntryCount = getSupportFragmentManager().getBackStackEntryCount() - 1;
 
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.OnFr
 
     private void showBackArrow(boolean shouldShowBackButton) {
         getSupportActionBar().setDisplayHomeAsUpEnabled(shouldShowBackButton);
-        getSupportActionBar().setDisplayShowHomeEnabled(shouldShowBackButton);
+        getSupportActionBar().setDisplayShowHomeEnabled(!shouldShowBackButton);
     }
 
     private void resetToolbarTitle() {
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.OnFr
         try {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, fragmentToOpen);
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             transaction.addToBackStack(screenName);
             transaction.commit();
         } catch (Exception ignore) {

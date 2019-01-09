@@ -1,6 +1,5 @@
 package com.taboola.android.sdksamples.api.feed;
 
-import android.content.Context;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -27,24 +26,18 @@ import com.taboola.android.sdksamples.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FeedApiFragment extends Fragment {
+/**
+ * The initialization of TaboolaAPI is done in the Application class
+ * If your project does not have an Application extending class, create one and then init TaboolaApi
+ */
 
-    private static final String TAG = FeedApiFragment.class.getSimpleName();
-    public static final String PUBLISHER = "sdk-tester";
-    public static final String API_KEY = "d39df1418f5a4819c9eae2ca02595d57de98c246";
+public class FeedApiFragment extends Fragment {
 
     private Snackbar snackbar;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private TBPlacement mPlacement;
     private List<Object> mData = new ArrayList<>();
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        TaboolaApi.getInstance().init(context.getApplicationContext(), PUBLISHER, API_KEY);
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -76,11 +69,13 @@ public class FeedApiFragment extends Fragment {
         mRecyclerView.addOnScrollListener(scrollListener);
 
         OnAttributionClick handleAttributionClickListener = () -> TaboolaApi.getInstance().handleAttributionClick(getActivity());
+
         mData.add(getString(R.string.lorem_ipsum_short));
         mAdapter = new FeedAdapter(mData, handleAttributionClickListener);
         mRecyclerView.setAdapter(mAdapter);
         snackbar = Snackbar.make(mRecyclerView, "Waiting for network", Snackbar.LENGTH_INDEFINITE);
         snackbar.show();
+
         fetchTaboolaRecommendations();
     }
 

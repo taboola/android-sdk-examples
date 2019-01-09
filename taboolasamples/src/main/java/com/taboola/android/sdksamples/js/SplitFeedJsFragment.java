@@ -17,6 +17,11 @@ import android.webkit.WebView;
 import com.taboola.android.js.TaboolaJs;
 import com.taboola.android.utils.AssetUtil;
 
+/**
+ * The initialization of TaboolaJS is done in the Application class
+ * If your project does not have an Application extending class, create one and then init TaboolaJs.
+ */
+
 public class SplitFeedJsFragment extends Fragment {
 
     private static final String TAG = "MidWidgetWithFeedJsFrag";
@@ -31,8 +36,8 @@ public class SplitFeedJsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final Context context = inflater.getContext();
         mWebView = new WebView(context);
+        TaboolaJs.getInstance().registerWebView(mWebView);
         initWebViewSettings(mWebView);
-        initTaboolaJs(mWebView);
         loadHtml();
         return mWebView;
     }
@@ -56,12 +61,6 @@ public class SplitFeedJsFragment extends Fragment {
         CookieManager.getInstance().setAcceptCookie(true);
     }
 
-    private void initTaboolaJs(WebView webView) {
-        TaboolaJs.getInstance()
-                .init(webView.getContext().getApplicationContext())
-                .registerWebView(mWebView);
-    }
-
     @Override
     public void onDetach() {
         TaboolaJs.getInstance().unregisterWebView(mWebView);
@@ -69,10 +68,9 @@ public class SplitFeedJsFragment extends Fragment {
     }
 
 
-
     private void loadHtml() {
 
-        //publisher should load it's url here instead
+        //publisher should load its url here instead
         String htmlContent = null;
         try {
             htmlContent = AssetUtil.getHtmlTemplateFileContent(getContext(), HTML_CONTENT_FILE_TITLE);
