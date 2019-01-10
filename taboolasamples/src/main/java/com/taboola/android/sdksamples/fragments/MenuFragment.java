@@ -59,7 +59,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         addButton("Mid Widget With Feed inside ScrollView", R.id.std_mid_article_with_feed_lnr);
         addButton("Mid Widget With Feed inside ListView", R.id.std_mid_article_with_feed_lv);
         addButton("Mid Widget With Feed inside RecyclerView", R.id.std_mid_article_with_feed_rv);
-        addButton("Mid Widget With Feed inside RecyclerView (Manual scroll)", R.id.std_mid_article_with_feed_rv_manual);
+        addButton("Feed inside RecyclerView (Manual scroll)", R.id.std_mid_article_with_feed_rv_manual);
         addButton("View Pager", R.id.std_view_pager);
 
         addHeader("sdk js");
