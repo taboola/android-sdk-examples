@@ -9,5 +9,6 @@
     android:fontFamily="sans-serif"
     android:textColor="@android:color/white"
     android:textSize="14sp"
+    android:textAllCaps="false"
     app:fontFamily="sans-serif"
     tools:text="Some Button Test" />
