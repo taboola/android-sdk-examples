@@ -18,7 +18,7 @@ import com.taboola.android.sdksamples.js.MidWidgetWithFeedJsFragment;
 import com.taboola.android.sdksamples.js.SplitFeedJsFragment;
 import com.taboola.android.sdksamples.js.ViewPagerViaJsFragment;
 import com.taboola.android.sdksamples.standard.FeedWithMiddleArticleInsideListViewFragment;
-import com.taboola.android.sdksamples.standard.FeedWithMiddleArticleInsideRecycleViewCustomFragment;
+import com.taboola.android.sdksamples.standard.FeedInsideRecycleViewCustomFragment;
 import com.taboola.android.sdksamples.standard.FeedWithMiddleArticleInsideRecycleViewFragment;
 import com.taboola.android.sdksamples.standard.FeedWithMiddleArticleInsideScrollViewFragment;
 import com.taboola.android.sdksamples.standard.ViewPagerViaStandartFragment;
@@ -116,7 +116,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.std_mid_article_with_feed_rv_manual:
-                fragmentToOpen = new FeedWithMiddleArticleInsideRecycleViewCustomFragment();
+                fragmentToOpen = new FeedInsideRecycleViewCustomFragment();
                 break;
         }
 

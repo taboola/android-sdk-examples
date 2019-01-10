@@ -22,7 +22,7 @@ import com.taboola.android.utils.SdkDetailsHelper;
 
 import java.util.List;
 
-public class FeedWithMiddleArticleInsideRecycleViewCustomFragment extends Fragment implements ScrollToTopListener {
+public class FeedInsideRecycleViewCustomFragment extends Fragment implements ScrollToTopListener {
 
     private RecyclerView mRecyclerView;
     private CustomAdapter mAdapter;
@@ -52,7 +52,7 @@ public class FeedWithMiddleArticleInsideRecycleViewCustomFragment extends Fragme
     private void initScrollListeners() {
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 if (!recyclerView.canScrollVertically(1) && dy > 0) {
                     // In this case the there is noting to scroll in publisher content and taboola should get the scroll control
                     mAdapter.enableWidgetScrolling(true);
