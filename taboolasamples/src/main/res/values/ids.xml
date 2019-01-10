@@ -10,6 +10,11 @@
     <item name="js_split" type="id" />
     <item name="js_mid_article_with_feed" type="id" />
     <item name="std_mid_article_with_feed_lnr" type="id" />
+    <item name="std_mid_article_with_feed_lv" type="id" />
+    <item name="std_mid_article_with_feed_rv" type="id" />
+    <item name="std_mid_article_with_feed_rv_manual" type="id" />
+    <item name="std_view_pager" type="id" />
+    <item name="js_view_pager" type="id" />
 
 
 </resources>

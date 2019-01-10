@@ -2,16 +2,13 @@ package com.taboola.android.sdksamples.fragments;
 
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.taboola.android.sdksamples.R;
@@ -19,7 +16,12 @@ import com.taboola.android.sdksamples.api.FourItemsApiFragment;
 import com.taboola.android.sdksamples.api.feed.FeedApiFragment;
 import com.taboola.android.sdksamples.js.MidWidgetWithFeedJsFragment;
 import com.taboola.android.sdksamples.js.SplitFeedJsFragment;
+import com.taboola.android.sdksamples.js.ViewPagerViaJsFragment;
+import com.taboola.android.sdksamples.standard.FeedWithMiddleArticleInsideListViewFragment;
+import com.taboola.android.sdksamples.standard.FeedWithMiddleArticleInsideRecycleViewCustomFragment;
+import com.taboola.android.sdksamples.standard.FeedWithMiddleArticleInsideRecycleViewFragment;
 import com.taboola.android.sdksamples.standard.FeedWithMiddleArticleInsideScrollViewFragment;
+import com.taboola.android.sdksamples.standard.ViewPagerViaStandartFragment;
 
 public class MenuFragment extends Fragment implements View.OnClickListener {
 
@@ -55,10 +57,16 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         mViewGroup = view.findViewById(R.id.main_menu_lyt);
         addHeader("sdk standard");
         addButton("Mid Widget With Feed inside ScrollView", R.id.std_mid_article_with_feed_lnr);
-        // TODO: 08/01/2019 add std screens
+        addButton("Mid Widget With Feed inside ListView", R.id.std_mid_article_with_feed_lv);
+        addButton("Mid Widget With Feed inside RecyclerView", R.id.std_mid_article_with_feed_rv);
+        addButton("Mid Widget With Feed inside RecyclerView (Manual scroll)", R.id.std_mid_article_with_feed_rv_manual);
+        addButton("View Pager", R.id.std_view_pager);
+
         addHeader("sdk js");
         addButton("Mid Widget With Feed ", R.id.js_mid_article_with_feed);
         addButton("Split Feed", R.id.js_split);
+        addButton("View Pager", R.id.js_view_pager);
+
         addHeader("sdk api");
         addButton("Widget With 4 items", R.id.api_4_items_widget);
         addButton("Feed", R.id.api_feed);
@@ -69,27 +77,51 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
         String screenName = v.getTag().toString();
-
+        Fragment fragmentToOpen = null;
         switch (v.getId()) {
             case R.id.api_4_items_widget:
-                openFragment(new FourItemsApiFragment(), screenName);
+                fragmentToOpen = new FourItemsApiFragment();
                 break;
 
             case R.id.api_feed:
-                openFragment(new FeedApiFragment(), screenName);
+                fragmentToOpen = new FeedApiFragment();
                 break;
 
             case R.id.js_split:
-                openFragment(new SplitFeedJsFragment(), screenName);
+                fragmentToOpen = new SplitFeedJsFragment();
                 break;
 
             case R.id.js_mid_article_with_feed:
-                openFragment(new MidWidgetWithFeedJsFragment(), screenName);
+                fragmentToOpen = new MidWidgetWithFeedJsFragment();
                 break;
 
             case R.id.std_mid_article_with_feed_lnr:
-                openFragment(new FeedWithMiddleArticleInsideScrollViewFragment(), screenName);
+                fragmentToOpen = new FeedWithMiddleArticleInsideScrollViewFragment();
                 break;
+
+            case R.id.js_view_pager:
+                fragmentToOpen = new ViewPagerViaJsFragment();
+                break;
+
+            case R.id.std_view_pager:
+                fragmentToOpen = new ViewPagerViaStandartFragment();
+                break;
+
+            case R.id.std_mid_article_with_feed_lv:
+                fragmentToOpen = new FeedWithMiddleArticleInsideListViewFragment();
+                break;
+
+            case R.id.std_mid_article_with_feed_rv:
+                fragmentToOpen = new FeedWithMiddleArticleInsideRecycleViewFragment();
+                break;
+
+            case R.id.std_mid_article_with_feed_rv_manual:
+                fragmentToOpen = new FeedWithMiddleArticleInsideRecycleViewCustomFragment();
+                break;
+        }
+
+        if (fragmentToOpen != null) {
+            openFragment(fragmentToOpen, screenName);
         }
     }
 
@@ -109,12 +141,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
     private void addButton(String screenName, int id) {
         Context context = mViewGroup.getContext();
-        /*Button button = (Button) LayoutInflater.from(context).inflate(R.layout.button_item, mViewGroup, false);
-        button.setText(screenName);
-        button.setTag(screenName);
-        button.setId(id);
-        button.setOnClickListener(this);*/
-
         TextView textView = (TextView) LayoutInflater.from(context).inflate(R.layout.button_item, mViewGroup, false);
         textView.setText(screenName);
         textView.setTag(screenName);
