@@ -56,13 +56,18 @@ public abstract class BaseTabFragment<T extends BaseTaboolaFragment> extends Fra
                 mPresenter.setCurrentPage(currentItem);
                 T fragment = mAdapter.getItem(currentItem);
                 fragment.onPageSelected();
-                mTitleTextView.setText(String.format(Locale.getDefault(), "page %d", currentItem + 1));
+                mTitleTextView.setText(getTextForItem(currentItem));
 
             }
         };
 
         mViewPager.addOnPageChangeListener(mOnPageChangeListener);
         mViewPager.post(() -> mOnPageChangeListener.onPageSelected(mViewPager.getCurrentItem()));
+    }
+
+    @NonNull
+    protected String getTextForItem(int currentItem) {
+        return String.format(Locale.getDefault(), "page %d", currentItem + 1);
     }
 
     protected void setupViewPagerAdapter(FragmentsAdapter<T> adapter) {

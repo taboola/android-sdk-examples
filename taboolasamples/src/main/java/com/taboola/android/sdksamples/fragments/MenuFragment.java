@@ -21,7 +21,7 @@ import com.taboola.android.sdksamples.standard.FeedWithMiddleArticleInsideListVi
 import com.taboola.android.sdksamples.standard.FeedInsideRecycleViewCustomFragment;
 import com.taboola.android.sdksamples.standard.FeedWithMiddleArticleInsideRecycleViewFragment;
 import com.taboola.android.sdksamples.standard.FeedWithMiddleArticleInsideScrollViewFragment;
-import com.taboola.android.sdksamples.standard.ViewPagerViaStandartFragment;
+import com.taboola.android.sdksamples.standard.tabs.ViewPagerViaStandardFragment;
 
 public class MenuFragment extends Fragment implements View.OnClickListener {
 
@@ -55,21 +55,20 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mViewGroup = view.findViewById(R.id.main_menu_lyt);
-        addHeader("sdk standard");
-        addButton("Mid Widget With Feed inside ScrollView", R.id.std_mid_article_with_feed_lnr);
-        addButton("Mid Widget With Feed inside ListView", R.id.std_mid_article_with_feed_lv);
-        addButton("Mid Widget With Feed inside RecyclerView", R.id.std_mid_article_with_feed_rv);
-        addButton("Feed inside RecyclerView (Manual scroll)", R.id.std_mid_article_with_feed_rv_manual);
-        addButton("View Pager", R.id.std_view_pager);
 
-        addHeader("sdk js");
-        addButton("Mid Widget With Feed ", R.id.js_mid_article_with_feed);
+
+        addHeader("SDK VIA NATIVE");
+        addButton("Widget + Feed (ScrollView)", R.id.std_mid_article_with_feed_lnr);
+        addButton("Widget + Feed (RecyclerView)", R.id.std_mid_article_with_feed_rv);
+        addButton("Widget + Feed (RecyclerView) Manual Scroll Switch", R.id.std_mid_article_with_feed_rv_manual);
+        addButton("ViewPager/Horizontal Scroll", R.id.std_view_pager);
+        addButton("Widget + Feed (ListView)", R.id.std_mid_article_with_feed_lv);
+
+        addHeader("SDK VIA JS");
+        addButton("Widget + Feed ", R.id.js_mid_article_with_feed);
         addButton("Split Feed", R.id.js_split);
         addButton("View Pager", R.id.js_view_pager);
 
-        addHeader("sdk api");
-        addButton("Widget With 4 items", R.id.api_4_items_widget);
-        addButton("Feed", R.id.api_feed);
     }
 
 
@@ -104,7 +103,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.std_view_pager:
-                fragmentToOpen = new ViewPagerViaStandartFragment();
+                fragmentToOpen = new ViewPagerViaStandardFragment();
                 break;
 
             case R.id.std_mid_article_with_feed_lv:
