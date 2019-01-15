@@ -1,4 +1,4 @@
-package com.taboola.android.sdksamples.fragments;
+package com.taboola.android.sdksamples;
 
 
 import android.content.Context;
