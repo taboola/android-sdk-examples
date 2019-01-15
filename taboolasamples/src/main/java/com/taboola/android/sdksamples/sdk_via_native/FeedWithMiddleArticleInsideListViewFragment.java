@@ -1,4 +1,4 @@
-package com.taboola.android.sdksamples.standard;
+package com.taboola.android.sdksamples.sdk_via_native;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.taboola.android.TaboolaWidget;
 import com.taboola.android.sdksamples.R;
-import com.taboola.android.sdksamples.data.ListItems;
 import com.taboola.android.utils.SdkDetailsHelper;
 
 import java.util.List;
@@ -76,20 +75,20 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
 
     static class ListViewAdapter extends BaseAdapter {
 
-        private final List<ListItems.FeedListItem> mData;
+        private final List<ListItemsGenerator.FeedListItem> mData;
         private TaboolaWidget mMiddleTaboolaWidget;
         private TaboolaWidget mInfiniteTaboolaView;
 
 
         ListViewAdapter() {
-            mData = ListItems.getGeneratedData(true);
+            mData = ListItemsGenerator.getGeneratedData(true);
         }
 
 
         @Override
-        public @ListItems.FeedListItem.ItemType
+        public @ListItemsGenerator.FeedListItem.ItemType
         int getItemViewType(int position) {
-            ListItems.FeedListItem item = getItem(position);
+            ListItemsGenerator.FeedListItem item = getItem(position);
             return item.type;
         }
 
@@ -100,7 +99,7 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
         }
 
         @Override
-        public ListItems.FeedListItem getItem(int position) {
+        public ListItemsGenerator.FeedListItem getItem(int position) {
             return mData.get(position);
         }
 
@@ -113,14 +112,14 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
         ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             switch (viewType) {
 
-                case ListItems.FeedListItem.ItemType.TABOOLA_MID_ITEM:
+                case ListItemsGenerator.FeedListItem.ItemType.TABOOLA_MID_ITEM:
                     if (mMiddleTaboolaWidget == null) {
                         mMiddleTaboolaWidget = createTaboolaWidget(parent.getContext(), false);
                         buildMiddleArticleWidget(mMiddleTaboolaWidget);
                     }
                     return new ViewHolderTaboola(mMiddleTaboolaWidget, viewType);
 
-                case ListItems.FeedListItem.ItemType.TABOOLA_ITEM:
+                case ListItemsGenerator.FeedListItem.ItemType.TABOOLA_ITEM:
                     if (mInfiniteTaboolaView == null) {
                         mInfiniteTaboolaView = createTaboolaWidget(parent.getContext(), true);
                         buildBelowArticleWidget(mInfiniteTaboolaView);
@@ -128,7 +127,7 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
                     return new ViewHolderTaboola(mInfiniteTaboolaView, viewType);
 
                 default:
-                case ListItems.FeedListItem.ItemType.RANDOM_ITEM:
+                case ListItemsGenerator.FeedListItem.ItemType.RANDOM_ITEM:
                     View appCompatImageView = LayoutInflater.from(parent.getContext()).inflate(R.layout.random_item, parent, false);
                     return new RandomImageViewHolder(appCompatImageView, viewType);
             }
@@ -138,7 +137,7 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            @ListItems.FeedListItem.ItemType int viewType = getItemViewType(position);
+            @ListItemsGenerator.FeedListItem.ItemType int viewType = getItemViewType(position);
             ViewHolder viewHolder;
             if (convertView == null || convertView.getTag() == null || ((ViewHolder) convertView.getTag()).mViewType != viewType) {
                 viewHolder = onCreateViewHolder(parent, viewType);
@@ -148,10 +147,10 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
             }
 
 
-            if (viewType == ListItems.FeedListItem.ItemType.RANDOM_ITEM) {
+            if (viewType == ListItemsGenerator.FeedListItem.ItemType.RANDOM_ITEM) {
                 RandomImageViewHolder vh = (RandomImageViewHolder) viewHolder;
-                ListItems.FeedListItem item = getItem(position);
-                ListItems.RandomItem randomItem = (ListItems.RandomItem) item;
+                ListItemsGenerator.FeedListItem item = getItem(position);
+                ListItemsGenerator.RandomItem randomItem = (ListItemsGenerator.RandomItem) item;
                 final ImageView imageView = vh.imageView;
                 imageView.setBackgroundColor(randomItem.color);
                 vh.textView.setText(randomItem.randomText);
@@ -175,7 +174,7 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
 
         static abstract class ViewHolder {
 
-            private final @ListItems.FeedListItem.ItemType
+            private final @ListItemsGenerator.FeedListItem.ItemType
             int mViewType;
             View mView;
 

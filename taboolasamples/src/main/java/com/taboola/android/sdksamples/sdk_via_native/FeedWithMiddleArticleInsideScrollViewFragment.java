@@ -1,4 +1,4 @@
-package com.taboola.android.sdksamples.standard;
+package com.taboola.android.sdksamples.sdk_via_native;
 
 
 import android.os.Bundle;

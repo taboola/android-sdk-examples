@@ -1,4 +1,4 @@
-package com.taboola.android.sdksamples.standard.tabs;
+package com.taboola.android.sdksamples.sdk_via_native;
 
 
 import android.content.Context;

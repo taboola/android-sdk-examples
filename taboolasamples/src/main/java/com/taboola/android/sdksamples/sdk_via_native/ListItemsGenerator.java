@@ -1,4 +1,4 @@
-package com.taboola.android.sdksamples.data;
+package com.taboola.android.sdksamples.sdk_via_native;
 
 import android.graphics.Color;
 import android.support.annotation.IntDef;
@@ -11,7 +11,7 @@ import java.util.Random;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
-public class ListItems {
+public class ListItemsGenerator {
 
     public abstract static class FeedListItem {
 

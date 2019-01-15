@@ -1,4 +1,4 @@
-package com.taboola.android.sdksamples.standard.tabs;
+package com.taboola.android.sdksamples.sdk_via_native;
 
 import android.support.annotation.NonNull;
 
@@ -6,7 +6,7 @@ import com.taboola.android.sdksamples.tabs.BaseTabFragment;
 import com.taboola.android.sdksamples.tabs.BaseTaboolaFragment;
 import com.taboola.android.sdksamples.tabs.FragmentsAdapter;
 
-public class ViewPagerViaStandardFragment extends BaseTabFragment<BaseTaboolaFragment> {
+public class ViewPagerFragment extends BaseTabFragment<BaseTaboolaFragment> {
 
     @Override
     protected void setupViewPagerAdapter(FragmentsAdapter<BaseTaboolaFragment> adapter) {

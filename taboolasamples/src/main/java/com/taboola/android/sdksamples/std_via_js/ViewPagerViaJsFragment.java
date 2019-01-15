@@ -1,4 +1,4 @@
-package com.taboola.android.sdksamples.js;
+package com.taboola.android.sdksamples.std_via_js;
 
 import android.content.Context;
 import android.os.Build;
