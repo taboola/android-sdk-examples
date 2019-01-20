@@ -14,6 +14,8 @@ import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import com.taboola.android.js.OnRenderListener;
+import com.taboola.android.js.OnResizeListener;
 import com.taboola.android.js.TaboolaJs;
 import com.taboola.android.utils.AssetUtil;
 
@@ -22,9 +24,9 @@ import com.taboola.android.utils.AssetUtil;
  * If your project does not have an Application extending class, create one and then init TaboolaJs.
  */
 
-public class MidWidgetWithFeedJsFragment extends Fragment {
+public class MidWidgetWithFeedJsFragment extends Fragment implements OnRenderListener, OnResizeListener {
 
-    private static final String TAG = "MidWidgetWithFeedJsFrag";
+    private static final String TAG = "DEBUG";
     private static final String HTML_CONTENT_FILE_TITLE = "sampleContentPage.html";
     private static final String BASE_URL = "http://example.com";
 
@@ -37,6 +39,8 @@ public class MidWidgetWithFeedJsFragment extends Fragment {
         final Context context = inflater.getContext();
         mWebView = new WebView(context);
         TaboolaJs.getInstance().registerWebView(mWebView);
+        TaboolaJs.getInstance().setOnRenderListener(mWebView, this);
+        TaboolaJs.getInstance().setOnResizeListener(mWebView, this);
         initWebViewSettings(mWebView);
         loadHtml();
         return mWebView;
@@ -68,7 +72,6 @@ public class MidWidgetWithFeedJsFragment extends Fragment {
     }
 
 
-
     private void loadHtml() {
 
         //publisher should load its url here instead
@@ -80,5 +83,20 @@ public class MidWidgetWithFeedJsFragment extends Fragment {
             e.printStackTrace();
         }
         mWebView.loadDataWithBaseURL(BASE_URL, htmlContent, "text/html", "UTF-8", "");
+    }
+
+    @Override
+    public void onRenderSuccessful(WebView webView, String placementName, int height) {
+        Log.d(TAG, "onRenderSuccessful() called with: placementName = [" + placementName + "], height = [" + height + "]");
+    }
+
+    @Override
+    public void onRenderFailed(WebView webView, String placementName, String errorMessage) {
+        Log.d(TAG, "onRenderFailed() called with: placementName = [" + placementName + "], errorMessage = [" + errorMessage + "]");
+    }
+
+    @Override
+    public void onResize(WebView webView, String placementName, int height) {
+        Log.d(TAG, "onResize() called with: placementName = [" + placementName + "], height = [" + height + "]");
     }
 }
