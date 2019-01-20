@@ -41,7 +41,7 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
 
     static TaboolaWidget createTaboolaWidget(Context context, boolean infiniteWidget) {
         TaboolaWidget taboolaWidget = new TaboolaWidget(context);
-        int height = infiniteWidget ? SdkDetailsHelper.getDisplayHeight(context) * 2 : ViewGroup.LayoutParams.WRAP_CONTENT;
+        int height = infiniteWidget ? SdkDetailsHelper.getDisplayHeight(context) : ViewGroup.LayoutParams.WRAP_CONTENT;
         taboolaWidget.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
         return taboolaWidget;
     }
@@ -53,7 +53,7 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Mid Article")
-                .setMode("alternating-widget-without-video-1-on-1")
+                .setMode("alternating-widget-with-video-1-on-1")
                 .setTargetType("mix");
 
         taboolaWidget.fetchContent();
@@ -64,7 +64,7 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
                 .setPublisher("sdk-tester")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
-                .setPlacement("Feed without video")
+                .setPlacement("Feed with video")
                 .setMode("thumbs-feed-01")
                 .setTargetType("mix")
                 .setInterceptScroll(true);
@@ -77,7 +77,6 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
 
         private final List<ListItemsGenerator.FeedListItem> mData;
         private TaboolaWidget mMiddleTaboolaWidget;
-        private TaboolaWidget mInfiniteTaboolaView;
 
 
         ListViewAdapter() {
@@ -120,11 +119,9 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
                     return new ViewHolderTaboola(mMiddleTaboolaWidget, viewType);
 
                 case ListItemsGenerator.FeedListItem.ItemType.TABOOLA_ITEM:
-                    if (mInfiniteTaboolaView == null) {
-                        mInfiniteTaboolaView = createTaboolaWidget(parent.getContext(), true);
-                        buildBelowArticleWidget(mInfiniteTaboolaView);
-                    }
-                    return new ViewHolderTaboola(mInfiniteTaboolaView, viewType);
+                    TaboolaWidget taboolaWidgetInfinite = createTaboolaWidget(parent.getContext(), true);
+                    buildBelowArticleWidget(taboolaWidgetInfinite);
+                    return new ViewHolderTaboola(taboolaWidgetInfinite, viewType);
 
                 default:
                 case ListItemsGenerator.FeedListItem.ItemType.RANDOM_ITEM:

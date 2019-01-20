@@ -101,7 +101,7 @@ public class ListItemsGenerator {
 
 
         if (withMidView) {
-            randomImages.add(3, new TaboolaMidView());
+            randomImages.add(2, new TaboolaMidView());
         }
 
         randomImages.add(new TaboolaView());
