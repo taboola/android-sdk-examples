@@ -6,6 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 public class MainActivity extends AppCompatActivity implements MenuFragment.OnFragmentInteractionListener {
 
@@ -46,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.OnFr
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, new MenuFragment());
         transaction.commit();
+
+        prepareTaboolaLogoRotation();
     }
 
     private void showBackArrow(boolean shouldShowBackButton) {
@@ -74,5 +79,16 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.OnFr
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+
+    private void prepareTaboolaLogoRotation() {
+        try {
+            Animation rotateAnim = AnimationUtils.loadAnimation(this, R.anim.rotate);
+            View toolbarTaboolaLogo = mToolbar.getChildAt(1);
+            toolbarTaboolaLogo.setOnClickListener(v -> toolbarTaboolaLogo.startAnimation(rotateAnim));
+        } catch (Exception muteException) {
+
+        }
     }
 }
