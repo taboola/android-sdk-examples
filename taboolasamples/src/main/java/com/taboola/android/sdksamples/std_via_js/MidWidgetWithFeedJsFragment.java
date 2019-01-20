@@ -39,8 +39,13 @@ public class MidWidgetWithFeedJsFragment extends Fragment implements OnRenderLis
         final Context context = inflater.getContext();
         mWebView = new WebView(context);
         TaboolaJs.getInstance().registerWebView(mWebView);
-        TaboolaJs.getInstance().setOnRenderListener(mWebView, this);
-        TaboolaJs.getInstance().setOnResizeListener(mWebView, this);
+        TaboolaJs.getInstance().setOnRenderListener(mWebView, new );
+        TaboolaJs.getInstance().setOnResizeListener(mWebView, new OnResizeListener() {
+            @Override
+            public void onResize(WebView webView, String s, int i) {
+
+            }
+        });
         initWebViewSettings(mWebView);
         loadHtml();
         return mWebView;
@@ -67,6 +72,8 @@ public class MidWidgetWithFeedJsFragment extends Fragment implements OnRenderLis
 
     @Override
     public void onDetach() {
+        TaboolaJs.getInstance().setOnRenderListener(mWebView, null);
+        TaboolaJs.getInstance().setOnResizeListener(mWebView, null);
         TaboolaJs.getInstance().unregisterWebView(mWebView);
         super.onDetach();
     }
