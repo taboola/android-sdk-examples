@@ -11,13 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.taboola.android.sdksamples.api.FourItemsApiFragment;
-import com.taboola.android.sdksamples.api.feed.FeedApiFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedInsideRecycleViewCustomFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideListViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideRecycleViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideScrollViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.ViewPagerFragment;
+import com.taboola.android.sdksamples.sdk_via_native.WidgetDynamicThemeChange;
 import com.taboola.android.sdksamples.std_via_js.MidWidgetWithFeedJsFragment;
 import com.taboola.android.sdksamples.std_via_js.SplitFeedJsFragment;
 import com.taboola.android.sdksamples.std_via_js.ViewPagerViaJsFragment;
@@ -62,6 +61,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         addButton("Widget + Feed (RecyclerView) Manual Scroll Switch", R.id.std_mid_article_with_feed_rv_manual);
         addButton("ViewPager/Horizontal Scroll", R.id.std_view_pager);
         addButton("Widget + Feed (ListView)", R.id.std_mid_article_with_feed_lv);
+        addButton("Widget dynamic theme change (RecyclerView)", R.id.std_widget_dynamic_theme);
 
         addHeader("SDK VIA JS");
         addButton("Widget + Feed ", R.id.js_mid_article_with_feed);
@@ -108,6 +108,9 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
             case R.id.std_mid_article_with_feed_rv_manual:
                 fragmentToOpen = new FeedInsideRecycleViewCustomFragment();
+                break;
+            case R.id.std_widget_dynamic_theme:
+                fragmentToOpen = new WidgetDynamicThemeChange();
                 break;
         }
 

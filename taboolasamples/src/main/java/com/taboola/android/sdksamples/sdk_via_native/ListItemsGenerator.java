@@ -107,4 +107,16 @@ public class ListItemsGenerator {
         randomImages.add(new TaboolaView());
         return randomImages;
     }
+
+
+    public static List<FeedListItem> getGeneratedDataForWidgetDynamic() {
+        List<FeedListItem> randomImages = new ArrayList<>();
+        randomImages.add(new RandomItem(Color.parseColor("#c9eae1")));
+        randomImages.add(new RandomItem(Color.parseColor("#acdadc")));
+        randomImages.add(new TaboolaMidView());
+        randomImages.add(new RandomItem(Color.parseColor("#fada5e")));
+        randomImages.add(new RandomItem(Color.parseColor("#d0e4b2")));
+        randomImages.add(new RandomItem(Color.parseColor("#d7858e")));
+        return randomImages;
+    }
 }

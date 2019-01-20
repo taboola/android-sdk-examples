@@ -13,6 +13,7 @@
     <item name="std_mid_article_with_feed_lv" type="id" />
     <item name="std_mid_article_with_feed_rv" type="id" />
     <item name="std_mid_article_with_feed_rv_manual" type="id" />
+    <item name="std_widget_dynamic_theme" type="id" />
     <item name="std_view_pager" type="id" />
     <item name="js_view_pager" type="id" />
 
