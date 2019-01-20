@@ -11,17 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.taboola.android.sdksamples.R;
 import com.taboola.android.sdksamples.api.FourItemsApiFragment;
 import com.taboola.android.sdksamples.api.feed.FeedApiFragment;
-import com.taboola.android.sdksamples.std_via_js.MidWidgetWithFeedJsFragment;
-import com.taboola.android.sdksamples.std_via_js.SplitFeedJsFragment;
-import com.taboola.android.sdksamples.std_via_js.ViewPagerViaJsFragment;
-import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideListViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedInsideRecycleViewCustomFragment;
+import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideListViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideRecycleViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideScrollViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.ViewPagerFragment;
+import com.taboola.android.sdksamples.std_via_js.MidWidgetWithFeedJsFragment;
+import com.taboola.android.sdksamples.std_via_js.SplitFeedJsFragment;
+import com.taboola.android.sdksamples.std_via_js.ViewPagerViaJsFragment;
 
 public class MenuFragment extends Fragment implements View.OnClickListener {
 
@@ -78,13 +77,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         String screenName = v.getTag().toString();
         Fragment fragmentToOpen = null;
         switch (v.getId()) {
-            case R.id.api_4_items_widget:
-                fragmentToOpen = new FourItemsApiFragment();
-                break;
-
-            case R.id.api_feed:
-                fragmentToOpen = new FeedApiFragment();
-                break;
 
             case R.id.js_split:
                 fragmentToOpen = new SplitFeedJsFragment();
