@@ -12,6 +12,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="vertical">
+
+        <View
+            android:id="@+id/footer"
+            android:layout_width="1dp"
+            android:layout_height="20dp" />
+
     </LinearLayout>
 
 

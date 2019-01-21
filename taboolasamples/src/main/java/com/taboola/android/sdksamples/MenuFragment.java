@@ -130,7 +130,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         TextView textView = (TextView) LayoutInflater.from(context).inflate(R.layout.menu_header_item,
                 mViewGroup, false);
         textView.setText(title);
-        mViewGroup.addView(textView);
+        mViewGroup.addView(textView, mViewGroup.getChildCount() - 1);
     }
 
     private void addButton(String screenName, int id) {
@@ -141,7 +141,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         textView.setId(id);
         textView.setOnClickListener(this);
 
-        mViewGroup.addView(textView);
+        mViewGroup.addView(textView, mViewGroup.getChildCount() - 1);
     }
 
     public interface OnFragmentInteractionListener {
