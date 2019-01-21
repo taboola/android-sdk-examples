@@ -1,4 +1,4 @@
-package com.taboola.android.sdksamples.api;
+package com.taboola.android.sdksamples.tb_api;
 
 import android.graphics.Color;
 import android.graphics.Point;

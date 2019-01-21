@@ -1,4 +1,4 @@
-package com.taboola.android.sdksamples.api.feed;
+package com.taboola.android.sdksamples.tb_api.feed;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

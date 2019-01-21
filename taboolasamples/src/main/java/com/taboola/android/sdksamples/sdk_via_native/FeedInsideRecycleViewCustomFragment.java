@@ -53,7 +53,7 @@ public class FeedInsideRecycleViewCustomFragment extends Fragment implements Scr
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 if (!recyclerView.canScrollVertically(1) && dy > 0) {
-                    // In this case the there is noting to scroll in publisher content and taboola should get the scroll control
+                    // In this case: there is nothing to scroll in publisher content and taboola should get the scroll control
                     mAdapter.enableWidgetScrolling(true);
                 }
                 super.onScrolled(recyclerView, dx, dy);

@@ -1,4 +1,4 @@
-package com.taboola.android.sdksamples.api.feed;
+package com.taboola.android.sdksamples.tb_api.feed;
 
 
 import android.support.annotation.NonNull;
