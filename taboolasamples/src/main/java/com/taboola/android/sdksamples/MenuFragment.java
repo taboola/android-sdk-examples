@@ -24,7 +24,6 @@ import com.taboola.android.sdksamples.std_via_js.ViewPagerViaJsFragment;
 public class MenuFragment extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
-    private ViewGroup mViewGroup;
 
     @Override
     public void onAttach(Context context) {
@@ -43,11 +42,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         mListener = null;
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        mViewGroup = null;
-    }
 
     @Nullable
     @Override
@@ -58,20 +52,20 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mViewGroup = view.findViewById(R.id.main_menu_lyt);
+        ViewGroup viewGroup = view.findViewById(R.id.main_menu_lyt);
 
-        addHeader("SDK VIA NATIVE");
-        addButton("Widget + Feed (ScrollView)", R.id.std_mid_article_with_feed_lnr);
-        addButton("Widget + Feed (RecyclerView)", R.id.std_mid_article_with_feed_rv);
-        addButton("Widget + Feed (RecyclerView) Manual Scroll Switch", R.id.std_mid_article_with_feed_rv_manual);
-        addButton("ViewPager/Horizontal Scroll", R.id.std_view_pager);
-        addButton("Widget + Feed (ListView)", R.id.std_mid_article_with_feed_lv);
-        addButton("Widget dynamic theme change (RecyclerView)", R.id.std_widget_dynamic_theme);
+        addHeader("SDK VIA NATIVE", viewGroup);
+        addButton("Widget + Feed (ScrollView)", R.id.std_mid_article_with_feed_lnr, viewGroup);
+        addButton("Widget + Feed (RecyclerView)", R.id.std_mid_article_with_feed_rv, viewGroup);
+        addButton("Widget + Feed (RecyclerView) Manual Scroll Switch", R.id.std_mid_article_with_feed_rv_manual, viewGroup);
+        addButton("ViewPager/Horizontal Scroll", R.id.std_view_pager, viewGroup);
+        addButton("Widget + Feed (ListView)", R.id.std_mid_article_with_feed_lv, viewGroup);
+        addButton("Widget dynamic theme change (RecyclerView)", R.id.std_widget_dynamic_theme, viewGroup);
 
-        addHeader("SDK VIA JS");
-        addButton("Widget + Feed ", R.id.js_mid_article_with_feed);
-        addButton("Split Feed", R.id.js_split);
-        addButton("View Pager", R.id.js_view_pager);
+        addHeader("SDK VIA JS", viewGroup);
+        addButton("Widget + Feed ", R.id.js_mid_article_with_feed, viewGroup);
+        addButton("Split Feed", R.id.js_split, viewGroup);
+        addButton("View Pager", R.id.js_view_pager, viewGroup);
 
     }
 
@@ -130,23 +124,23 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void addHeader(String title) {
-        Context context = mViewGroup.getContext();
+    private void addHeader(String title, ViewGroup viewGroup) {
+        Context context = viewGroup.getContext();
         TextView textView = (TextView) LayoutInflater.from(context).inflate(R.layout.menu_header_item,
-                mViewGroup, false);
+                viewGroup, false);
         textView.setText(title);
-        mViewGroup.addView(textView, mViewGroup.getChildCount() - 1);
+        viewGroup.addView(textView, viewGroup.getChildCount() - 1);
     }
 
-    private void addButton(String screenName, int id) {
-        Context context = mViewGroup.getContext();
-        TextView textView = (TextView) LayoutInflater.from(context).inflate(R.layout.button_item, mViewGroup, false);
+    private void addButton(String screenName, int id, ViewGroup viewGroup) {
+        Context context = viewGroup.getContext();
+        TextView textView = (TextView) LayoutInflater.from(context).inflate(R.layout.button_item, viewGroup, false);
         textView.setText(screenName);
         textView.setTag(screenName);
         textView.setId(id);
         textView.setOnClickListener(this);
 
-        mViewGroup.addView(textView, mViewGroup.getChildCount() - 1);
+        viewGroup.addView(textView, viewGroup.getChildCount() - 1);
     }
 
     public interface OnFragmentInteractionListener {

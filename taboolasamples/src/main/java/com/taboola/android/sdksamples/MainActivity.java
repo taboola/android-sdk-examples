@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.OnFr
 
         // Code to handle toolbar title and back arrow
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {
-            int lastBackStackEntryCount =  getSupportFragmentManager().getBackStackEntryCount() - 1;
+            int lastBackStackEntryCount = getSupportFragmentManager().getBackStackEntryCount() - 1;
 
             if (lastBackStackEntryCount < 0) {
                 resetToolbarTitle();
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.OnFr
                 }
             } else {
                 if (getSupportActionBar() != null) {
-                    getSupportActionBar().setTitle( getSupportFragmentManager().getBackStackEntryAt(lastBackStackEntryCount).getName());
+                    getSupportActionBar().setTitle(getSupportFragmentManager().getBackStackEntryAt(lastBackStackEntryCount).getName());
                     showBackArrow(true);
                 }
             }
@@ -47,12 +47,14 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.OnFr
     }
 
     private void showBackArrow(boolean shouldShowBackButton) {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(shouldShowBackButton);
-        getSupportActionBar().setDisplayShowHomeEnabled(!shouldShowBackButton);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(shouldShowBackButton);
+            getSupportActionBar().setDisplayShowHomeEnabled(!shouldShowBackButton);
+        }
     }
 
     private void resetToolbarTitle() {
-        getSupportActionBar().setTitle(R.string.toolbar_title);
+        mToolbar.setTitle(R.string.toolbar_title);
     }
 
 

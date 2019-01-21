@@ -89,7 +89,8 @@ public class WidgetDynamicThemeChange extends Fragment {
         }
 
         /**
-         * you must to call this method because you use the keepDependencies flag. like in this example and as you need for walla app.
+         * you must to call this method because you use the keepDependencies flag in {@link #createTaboolaWidget(Context)}
+         * In this sample was called by {@link WidgetDynamicThemeChange#onDestroy()}
          */
         public void onDestroy() {
             if (mTaboolaWidget != null) {

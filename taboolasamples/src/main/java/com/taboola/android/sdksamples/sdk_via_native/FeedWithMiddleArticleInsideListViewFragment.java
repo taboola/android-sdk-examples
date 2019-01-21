@@ -23,7 +23,7 @@ import java.util.List;
 public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
 
     /**
-     * We recommend using RecyclerView
+     * We recommend using {@link android.support.v7.widget.RecyclerView
      */
 
     @Nullable
