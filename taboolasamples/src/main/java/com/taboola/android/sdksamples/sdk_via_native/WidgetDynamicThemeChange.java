@@ -77,9 +77,9 @@ public class WidgetDynamicThemeChange extends Fragment {
         private static TaboolaWidget createTaboolaWidget(Context context) {
             TaboolaWidget taboolaWidget = new TaboolaWidget(context);
 
-            //you should call this flag in case you are calling notifyDataSetChanged in order to make taboolaWidget keepDependencies
-            //if this flag is set to true, then you need call TaboolaWidget.onDestroy() once the adapter is going to be cleared,
-            // in this sample onDestroy of fragment
+            // You should call this flag in case you are calling notifyDataSetChanged in order to make taboolaWidget keepDependencies.
+            // if this flag is set to true, you need to call TaboolaWidget.onDestroy() once the adapter is going to be cleared,
+            // in this sample it's in the onDestroy method of the fragment
             HashMap<String, String> optionalPageCommands = new HashMap<>();
             optionalPageCommands.put("keepDependencies", "true");
             taboolaWidget.setOptionalPageCommands(optionalPageCommands);

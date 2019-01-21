@@ -25,7 +25,7 @@ import java.util.List;
 public class FeedInsideRecycleViewFragment extends BaseTaboolaFragment {
 
 
-    //in RecycleView the widget will be rendered only when user will scroll to widget
+    // In RecycleView the widget will be rendered only when the user will scroll to widget
     // so no need to fetch when page is selected
 
     @Override

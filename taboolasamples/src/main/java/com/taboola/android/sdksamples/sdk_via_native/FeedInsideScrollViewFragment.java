@@ -34,7 +34,7 @@ public class FeedInsideScrollViewFragment extends BaseTaboolaFragment {
 
     @Override
     public void onPageSelected() {
-        //in ScrollView the widget will need to be rendered only when page is selected, not need to fetch if user didn't see taboola view
+        // In ScrollView the widget will need to be rendered only when page is selected, no need to fetch if user didn't see taboola view
         // this is the most common use for view pager and you should follow this example
         // unless you use RecycleView, then you need to follow FeedInsideRecycleViewFragment example
         if (!isTaboolaFetched) {
