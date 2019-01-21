@@ -2,7 +2,6 @@ package com.taboola.android.sdksamples;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,7 +12,6 @@ import android.view.animation.AnimationUtils;
 public class MainActivity extends AppCompatActivity implements MenuFragment.OnFragmentInteractionListener {
 
     private Toolbar mToolbar;
-    private FragmentManager.OnBackStackChangedListener onBackStackChangedListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +24,8 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.OnFr
         resetToolbarTitle();
 
         // Code to handle toolbar title and back arrow
-        onBackStackChangedListener = () -> {
-            int lastBackStackEntryCount = getSupportFragmentManager().getBackStackEntryCount() - 1;
+        getSupportFragmentManager().addOnBackStackChangedListener(() -> {
+            int lastBackStackEntryCount =  getSupportFragmentManager().getBackStackEntryCount() - 1;
 
             if (lastBackStackEntryCount < 0) {
                 resetToolbarTitle();
@@ -35,20 +33,15 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.OnFr
                     showBackArrow(false);
                 }
             } else {
-                FragmentManager.BackStackEntry lastBackStackEntry =
-                        getSupportFragmentManager().getBackStackEntryAt(lastBackStackEntryCount);
                 if (getSupportActionBar() != null) {
-                    getSupportActionBar().setTitle(lastBackStackEntry.getName());
+                    getSupportActionBar().setTitle( getSupportFragmentManager().getBackStackEntryAt(lastBackStackEntryCount).getName());
                     showBackArrow(true);
                 }
             }
-        };
+        });
 
-        getSupportFragmentManager().addOnBackStackChangedListener(onBackStackChangedListener);
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, new MenuFragment());
-        transaction.commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, new MenuFragment()).commit();
 
         prepareTaboolaLogoRotation();
     }
@@ -66,12 +59,13 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.OnFr
     @Override
     public void onMenuItemClicked(Fragment fragmentToOpen, String screenName) {
         try {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.container, fragmentToOpen);
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            transaction.addToBackStack(screenName);
-            transaction.commit();
-        } catch (Exception ignore) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, fragmentToOpen)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .addToBackStack(screenName)
+                    .commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -84,10 +78,11 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.OnFr
 
     private void prepareTaboolaLogoRotation() {
         try {
-            Animation rotateAnim = AnimationUtils.loadAnimation(this, R.anim.rotate);
+            Animation rotateAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate);
             View toolbarTaboolaLogo = mToolbar.getChildAt(1);
             toolbarTaboolaLogo.setOnClickListener(v -> toolbarTaboolaLogo.startAnimation(rotateAnim));
-        } catch (Exception muteException) {
+        } catch (Exception e) {
+            e.printStackTrace();
 
         }
     }

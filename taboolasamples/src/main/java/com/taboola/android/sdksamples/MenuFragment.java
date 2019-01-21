@@ -43,6 +43,12 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         mListener = null;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        mViewGroup = null;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,7 +59,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mViewGroup = view.findViewById(R.id.main_menu_lyt);
-
 
         addHeader("SDK VIA NATIVE");
         addButton("Widget + Feed (ScrollView)", R.id.std_mid_article_with_feed_lnr);
