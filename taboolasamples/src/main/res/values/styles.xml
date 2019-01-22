@@ -6,7 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="icon">@drawable/ic_toolbar_taboola</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+
     </style>
 
 </resources>
