@@ -28,6 +28,67 @@
         \n\nSuspendisse urna tortor, tempus sit amet elit in, posuere porttitor dui. Sed sollicitudin convallis odio, sit amet ornare justo feugiat sit amet. Integer eu scelerisque enim, tempus sagittis massa. Proin vel metus id augue sollicitudin suscipit. Nulla ultrices, nisl in ornare sollicitudin, sapien nunc consectetur dui, eu lobortis nisi ipsum non nunc. Quisque et massa urna. Sed quam purus, pretium ac ex nec, tempor placerat mauris.
     </string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fake_text">
+        Est domesticus fluctui, cesaris.
+        Why does the fish sing?
+        Teleporters harvest with faith!
+        Never vandalize a lubber.
+        Avocado can be tossed with thin quinoa, also try mash uping the soup with condensed milk.
+        Punishment ho! crush to be raided.
+        All whales scrape mighty, swashbuckling lads.
+        The ferengi goes friendship like a dead phenomenan.
+        Vae, adgium!
+        Tightly dissolve a mermaid.
+        It is a cloudy understanding, sir.
+        Transformator of a senior metamorphosis, desire the modification!
+    </string>
+
+    <string name="first_text_block">
+        <u><b><i>YouTube and Taboola: Defining the Future of Digital Video</i></b></u>\n\nEarly last month, I was asked to head out to Singapore for a one-day conference organized by IAB SEA + India called Tomorrow’s Digital Skills Today.\nI spoke about video creative and production from the psychological, data and research points of view, and although traveling there wasn’t easy (I flew 16 hours each way for a 48 hour stay)—I would definitely say it was worth it.\nAside from enjoying the modern city, delicious foods, and warm weather (not to mention a quick drink at the world famous Marina Bay Sands hotel rooftop), I also had the pleasure to co-present with Karl Duffill, Regional Agency Business Head at Google, who was asked to speak about video creatives as well.\nWhen preparing for this session, we found that although Taboola and Google are two different video platforms that give consumers a different experience, even when watching the same video, many of the video trends and recommendations regarding the video creative are similar: authenticity, keeping the viewer’s attention span in mind, inspiring the audience to take action, and more.\n
+              \n  <u><b><i>Authenticity in video drives success.</i></b></u>\n
+        YouTube has been identifying some really interesting trends in regards to video formats.\n
+People aren’t just watching videos with traditional storylines anymore—they’re spending hours watching gamers just play online games, they’re watching a lot of super short videos, and they’re especially loving live-streamed content.\n
+One of the things that these trends have in common is authenticity.\n
+        The person recording himself playing a video game did not prepare a script for if he wins or when he loses.\n
+    </string>
+
+    <string name="second_text_block">
+Authentic video creators don’t feel the need to spend hours planning a video—instead they upload a short video that gets their message across in an easy and relatable way. There’s nothing more real than a live-streamed video that includes every mistake and mishap that would’ve definitely been cut out of a recorded video.\n
+On a similar note, I spoke about the importance of authenticity in video. From the psychological perspective, it creates an intimate relationship between the consumer and the brand.\n
+I also presented some surprising findings—when analyzing the quality (bitrate) of the videos running on our network, we found that the average-quality videos performed significantly better in terms of both the viewability and the completion rate as opposed to videos with very high quality.\n
+We think this is directly related to a less authentic feel in high-quality videos.\n
+Bite, snack and meal sized videos perform better.\n\n
+With regard to video length, Karl really put it best.
+He stressed the importance of keeping the consumer’s attention span in mind when producing video creatives. He suggested creating videos for different attention spans, specifically, bite (6-second), snack (15-20 second) or meal (30-second)-sized videos.
+I spoke about video length as well, and focused on the impact that a short video (anything less than 30 seconds) can have.
+To illustrate, I presented one of the classic social psychology studies that found that watching a video of a person for half of a minute can predict how the viewer will feel about the person in the video after getting to know them long term.
+        \n\n<u><b><i>Inspiring consumers to take action.</i></b></u>\n\n
+Finally, and although video is known more for its power to inspire than its power to drive to immediate action, we spoke about driving said action.
+Psychologists identified that emotion, or how you feel about the brand, is one of the main determinants when a consumer is deciding what to buy.
+These emotions can be easily influenced with branded video. A recent analysis of our top 2,000 videos uncovered that videos that included some kind of emotional expression got a significantly higher viewability rate and completion rate.
+Another thing to consider as a marketer looking to inspire action—create and distribute specific content for specific audience groups.
+This was one of the main takeaways from a case study that Karl presented with AirBnB, who created video ads for audiences in the ‘dreaming’ stage of booking a trip and audiences in the ‘planning’ stage of booking a trip.
+When you think video, think consumer-first.
+When I think about what my learning are from this session, the thing that really stuck with me is that putting your consumer first is really key, regardless of where you choose to promote your video.
+Although we suggest planning a marketing mix that will allow to reap the benefits that each platform has to offer, remember these three things:
+        \n\n<u><b><i>Be authentic.</i></b></u>\n\n
+Customize video length to support your audience’s mindset
+Understand how your consumer makes decisions to drive action
+These will help you remember what the consumer really wants to engage with and will set you up for a successful marketing campaign.
+    </string>
+
+
+    <string name="toolbar_title">Taboola samples</string>
+    <string name="sdk_via_native">SDK VIA NATIVE</string>
+    <string name="std_mid_article_with_feed_lnr">Widget + Feed (ScrollView)</string>
+    <string name="std_mid_article_with_feed_rv">Widget + Feed (RecyclerView)</string>
+    <string name="std_mid_article_with_feed_rv_manual">Widget + Feed (RecyclerView) Manual Scroll Switch</string>
+    <string name="std_view_pager">ViewPager/Horizontal Scroll</string>
+    <string name="std_mid_article_with_feed_lv">Widget + Feed (ListView)</string>
+    <string name="std_widget_dynamic_theme">Widget dynamic theme change (RecyclerView)</string>
+    <string name="std_widget_xml">Widget Layout XML</string>
+    <string name="sdk_via_js">SDK VIA JS</string>
+    <string name="js_mid_article_with_feed">Widget + Feed</string>
+    <string name="js_split">Split Feed</string>
+    <string name="js_view_pager">View Pager</string>
 </resources>
