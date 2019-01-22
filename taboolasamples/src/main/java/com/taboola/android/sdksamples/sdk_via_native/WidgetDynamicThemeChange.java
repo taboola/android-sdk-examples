@@ -98,7 +98,6 @@ public class WidgetDynamicThemeChange extends Fragment {
             }
         }
 
-
         private void loadWidget(TaboolaWidget taboolaWidget) {
             taboolaWidget
                     .setPublisher("sdk-tester")
