@@ -104,19 +104,18 @@ public class WidgetDynamicThemeChange extends Fragment {
                     .setPublisher("sdk-tester")
                     .setPageType("article")
                     .setPageUrl("https://blog.taboola.com")
-                    .setTargetType("mix")
-                    .setInterceptScroll(true);
+                    .setTargetType("mix");
 
             switch (mTheme) {
                 case BLACK:
                     taboolaWidget
-                            .setPlacement("Mid Article")
-                            .setMode("alternating-widget-without-video-1-on-1");
+                            .setPlacement("Dark Mode Widget")
+                            .setMode("alternating-1x2-widget-dark");
                     break;
                 case WHITE:
                     taboolaWidget
                             .setPlacement("Mid Article")
-                            .setMode("alternating-widget-with-video-1-on-1");
+                            .setMode("alternating-1x2-widget");
                     break;
             }
 
