@@ -79,4 +79,16 @@ These will help you remember what the consumer really wants to engage with and w
 
 
     <string name="toolbar_title">Taboola samples</string>
-=</resources>
+    <string name="sdk_via_native">SDK VIA NATIVE</string>
+    <string name="std_mid_article_with_feed_lnr">Widget + Feed (ScrollView)</string>
+    <string name="std_mid_article_with_feed_rv">Widget + Feed (RecyclerView)</string>
+    <string name="std_mid_article_with_feed_rv_manual">Widget + Feed (RecyclerView) Manual Scroll Switch</string>
+    <string name="std_view_pager">ViewPager/Horizontal Scroll</string>
+    <string name="std_mid_article_with_feed_lv">Widget + Feed (ListView)</string>
+    <string name="std_widget_dynamic_theme">Widget dynamic theme change (RecyclerView)</string>
+    <string name="std_widget_xml">Widget Layout XML</string>
+    <string name="sdk_via_js">SDK VIA JS</string>
+    <string name="js_mid_article_with_feed">Widget + Feed</string>
+    <string name="js_split">Split Feed</string>
+    <string name="js_view_pager">View Pager</string>
+</resources>

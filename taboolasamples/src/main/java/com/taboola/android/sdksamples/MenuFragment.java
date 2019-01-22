@@ -15,6 +15,7 @@ import com.taboola.android.sdksamples.sdk_via_native.FeedInsideRecycleViewCustom
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideListViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideRecycleViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideScrollViewFragment;
+import com.taboola.android.sdksamples.sdk_via_native.SimpleWidgetFragment;
 import com.taboola.android.sdksamples.sdk_via_native.ViewPagerFragment;
 import com.taboola.android.sdksamples.sdk_via_native.WidgetDynamicThemeChange;
 import com.taboola.android.sdksamples.std_via_js.MidWidgetWithFeedJsFragment;
@@ -54,18 +55,19 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         ViewGroup viewGroup = view.findViewById(R.id.main_menu_lyt);
 
-        addHeader("SDK VIA NATIVE", viewGroup);
-        addButton("Widget + Feed (ScrollView)", R.id.std_mid_article_with_feed_lnr, viewGroup);
-        addButton("Widget + Feed (RecyclerView)", R.id.std_mid_article_with_feed_rv, viewGroup);
-        addButton("Widget + Feed (RecyclerView) Manual Scroll Switch", R.id.std_mid_article_with_feed_rv_manual, viewGroup);
-        addButton("ViewPager/Horizontal Scroll", R.id.std_view_pager, viewGroup);
-        addButton("Widget + Feed (ListView)", R.id.std_mid_article_with_feed_lv, viewGroup);
-        addButton("Widget dynamic theme change (RecyclerView)", R.id.std_widget_dynamic_theme, viewGroup);
+        addHeader(getString(R.string.sdk_via_native), viewGroup);
+        addButton(getString(R.string.std_mid_article_with_feed_lnr), R.id.std_mid_article_with_feed_lnr, viewGroup);
+        addButton(getString(R.string.std_mid_article_with_feed_rv), R.id.std_mid_article_with_feed_rv, viewGroup);
+        addButton(getString(R.string.std_mid_article_with_feed_rv_manual), R.id.std_mid_article_with_feed_rv_manual, viewGroup);
+        addButton(getString(R.string.std_view_pager), R.id.std_view_pager, viewGroup);
+        addButton(getString(R.string.std_mid_article_with_feed_lv), R.id.std_mid_article_with_feed_lv, viewGroup);
+        addButton(getString(R.string.std_widget_dynamic_theme), R.id.std_widget_dynamic_theme, viewGroup);
+        addButton(getString(R.string.std_widget_xml), R.id.std_widget_xml, viewGroup);
 
-        addHeader("SDK VIA JS", viewGroup);
-        addButton("Widget + Feed ", R.id.js_mid_article_with_feed, viewGroup);
-        addButton("Split Feed", R.id.js_split, viewGroup);
-        addButton("View Pager", R.id.js_view_pager, viewGroup);
+        addHeader(getString(R.string.sdk_via_js), viewGroup);
+        addButton(getString(R.string.js_mid_article_with_feed), R.id.js_mid_article_with_feed, viewGroup);
+        addButton(getString(R.string.js_split), R.id.js_split, viewGroup);
+        addButton(getString(R.string.js_view_pager), R.id.js_view_pager, viewGroup);
 
     }
 
@@ -108,8 +110,13 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
             case R.id.std_mid_article_with_feed_rv_manual:
                 fragmentToOpen = new FeedInsideRecycleViewCustomFragment();
                 break;
+
             case R.id.std_widget_dynamic_theme:
                 fragmentToOpen = new WidgetDynamicThemeChange();
+                break;
+
+            case R.id.std_widget_xml:
+                fragmentToOpen = new SimpleWidgetFragment();
                 break;
         }
 

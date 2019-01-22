@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:taboola="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/lorem_ipsum_short" />
+
+        <com.taboola.android.TaboolaWidget
+            android:id="@+id/taboola_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            taboola:mode="alternating-widget-without-video"
+            taboola:page_type="article"
+            taboola:placement="Below Article"
+            taboola:publisher="sdk-tester"
+            taboola:target_type="mix"
+            taboola:url="https://blog.taboola.com" />
+
+    </LinearLayout>
+
+</ScrollView>
+
