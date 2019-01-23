@@ -19,3 +19,5 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keepnames class com.taboola.android.integration_verifier.testing.tests.proguard_stub.ProguardVerificationStub

@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.taboola.android.sdksamples"
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -27,11 +27,11 @@ dependencies {
     implementation 'com.taboola:android-sdk:2.1.+'
 
     // include to have clicks opened in chrome tabs rather than in a default browser (mandatory)
-    implementation 'com.android.support:customtabs:28.0.0'
+    implementation 'com.android.support:customtabs:27.1.1'
 
     //used by the sample project
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
 
