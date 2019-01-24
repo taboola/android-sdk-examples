@@ -32,7 +32,7 @@ public class ViewPagerViaJsFragment extends BaseTabFragment<ViewPagerViaJsFragme
 
         private static final String TAG = "SampleJsTaboolaFragment";
         private static final String HTML_CONTENT_FILE = "sampleContentPagePrefetch.html";
-        private static final String BASE_URL = "http://example.com";
+        private static final String BASE_URL = "https://example.com";
 
         private WebView mWebView;
 

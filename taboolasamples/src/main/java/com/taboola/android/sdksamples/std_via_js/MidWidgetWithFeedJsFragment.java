@@ -28,7 +28,7 @@ public class MidWidgetWithFeedJsFragment extends Fragment implements OnRenderLis
 
     private static final String TAG = "DEBUG";
     private static final String HTML_CONTENT_FILE_TITLE = "sampleContentPage.html";
-    private static final String BASE_URL = "http://example.com";
+    private static final String BASE_URL = "https://example.com";
 
 
     private WebView mWebView;

@@ -18,6 +18,7 @@ import com.taboola.android.TaboolaWidget;
 import com.taboola.android.sdksamples.R;
 import com.taboola.android.utils.SdkDetailsHelper;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
@@ -43,6 +44,9 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
         TaboolaWidget taboolaWidget = new TaboolaWidget(context);
         int height = infiniteWidget ? SdkDetailsHelper.getDisplayHeight(context) : ViewGroup.LayoutParams.WRAP_CONTENT;
         taboolaWidget.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
+        HashMap<String, String> optionalPageCommands = new HashMap<>();
+        optionalPageCommands.put("useOnlineTemplate", "true");
+        taboolaWidget.setOptionalPageCommands(optionalPageCommands);
         return taboolaWidget;
     }
 

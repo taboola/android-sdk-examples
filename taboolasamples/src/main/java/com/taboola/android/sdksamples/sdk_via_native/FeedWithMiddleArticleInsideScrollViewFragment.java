@@ -14,13 +14,14 @@ import com.taboola.android.globalNotifications.GlobalNotificationReceiver;
 import com.taboola.android.sdksamples.R;
 import com.taboola.android.utils.SdkDetailsHelper;
 
+import java.util.HashMap;
+
 
 public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment implements GlobalNotificationReceiver.OnGlobalNotificationsListener {
 
     private static final String TAG = "DEBUG";
 
     GlobalNotificationReceiver mGlobalNotificationReceiver = new GlobalNotificationReceiver();
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -39,6 +40,9 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment impl
                 .setPlacement("Mid Article")
                 .setMode("alternating-widget-without-video-1-on-1")
                 .setTargetType("mix");
+        HashMap<String, String> optionalPageCommands = new HashMap<>();
+        optionalPageCommands.put("useOnlineTemplate", "true");
+        taboolaWidget.setOptionalPageCommands(optionalPageCommands);
         taboolaWidget.fetchContent();
     }
 
@@ -53,6 +57,9 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment impl
                 .setInterceptScroll(true);
 
         taboolaWidget.getLayoutParams().height = SdkDetailsHelper.getDisplayHeight(taboolaWidget.getContext());
+        HashMap<String, String> optionalPageCommands = new HashMap<>();
+        optionalPageCommands.put("useOnlineTemplate", "true");
+        taboolaWidget.setOptionalPageCommands(optionalPageCommands);
         taboolaWidget.fetchContent();
     }
 

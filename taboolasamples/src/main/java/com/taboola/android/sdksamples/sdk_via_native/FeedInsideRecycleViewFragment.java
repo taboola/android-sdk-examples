@@ -90,6 +90,8 @@ public class FeedInsideRecycleViewFragment extends BaseTaboolaFragment {
             //used for enable horizontal scroll
             HashMap<String, String> optionalPageCommands = new HashMap<>();
             optionalPageCommands.put("enableHorizontalScroll", "true");
+            optionalPageCommands.put("useOnlineTemplate", "true");
+            taboolaWidget.setOptionalPageCommands(optionalPageCommands);
             mInfiniteTaboolaView.setOptionalPageCommands(optionalPageCommands);
 
             taboolaWidget.fetchContent();

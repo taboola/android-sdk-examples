@@ -19,6 +19,7 @@ import com.taboola.android.listeners.ScrollToTopListener;
 import com.taboola.android.sdksamples.R;
 import com.taboola.android.utils.SdkDetailsHelper;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class FeedInsideRecycleViewCustomFragment extends Fragment implements ScrollToTopListener {
@@ -135,6 +136,9 @@ public class FeedInsideRecycleViewCustomFragment extends Fragment implements Scr
                     mGlobalTaboolaView.setAutoResizeHeight(false);
                     mGlobalTaboolaView.setInterceptScroll(mEnableWidgetScroll);
                     mGlobalTaboolaView.setScrollEnabled(mEnableWidgetScroll);
+                    HashMap<String, String> optionalPageCommands = new HashMap<>();
+                    optionalPageCommands.put("useOnlineTemplate", "true");
+                    mGlobalTaboolaView.setOptionalPageCommands(optionalPageCommands);
                     return new ViewHolderTaboola(mGlobalTaboolaView);
 
                 default:

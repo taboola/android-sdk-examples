@@ -26,7 +26,7 @@ public class SplitFeedJsFragment extends Fragment {
 
     private static final String TAG = "MidWidgetWithFeedJsFrag";
     private static final String HTML_CONTENT_FILE_TITLE = "sampleContentPageSplitFeed.html";
-    private static final String BASE_URL = "http://example.com";
+    private static final String BASE_URL = "https://example.com";
 
 
     private WebView mWebView;

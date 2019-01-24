@@ -87,7 +87,7 @@ public class FeedApiFragment extends Fragment {
         TBPlacementRequest placementRequest = new TBPlacementRequest(placementName, 4)
                 .setThumbnailSize(screenSize.x / 2, (screenSize.y / 6)); // ThumbnailSize is optional
 
-        TBRecommendationsRequest request = new TBRecommendationsRequest("http://example.com", "text");
+        TBRecommendationsRequest request = new TBRecommendationsRequest("https://example.com", "text");
         request.addPlacementRequest(placementRequest);
 
         TaboolaApi.getInstance().fetchRecommendations(request, new TBRecommendationRequestCallback() {

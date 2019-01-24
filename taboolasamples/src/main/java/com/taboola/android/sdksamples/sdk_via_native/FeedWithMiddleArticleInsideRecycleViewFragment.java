@@ -18,6 +18,7 @@ import com.taboola.android.TaboolaWidget;
 import com.taboola.android.sdksamples.R;
 import com.taboola.android.utils.SdkDetailsHelper;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class FeedWithMiddleArticleInsideRecycleViewFragment extends Fragment {
@@ -56,6 +57,9 @@ public class FeedWithMiddleArticleInsideRecycleViewFragment extends Fragment {
                 .setMode("alternating-widget-without-video-1-on-1")
                 .setTargetType("mix");
 
+        HashMap<String, String> optionalPageCommands = new HashMap<>();
+        optionalPageCommands.put("useOnlineTemplate", "true");
+        taboolaWidget.setOptionalPageCommands(optionalPageCommands);
         taboolaWidget.fetchContent();
     }
 
@@ -69,6 +73,9 @@ public class FeedWithMiddleArticleInsideRecycleViewFragment extends Fragment {
                 .setTargetType("mix")
                 .setInterceptScroll(true);
 
+        HashMap<String, String> optionalPageCommands = new HashMap<>();
+        optionalPageCommands.put("useOnlineTemplate", "true");
+        taboolaWidget.setOptionalPageCommands(optionalPageCommands);
         taboolaWidget.fetchContent();
     }
 

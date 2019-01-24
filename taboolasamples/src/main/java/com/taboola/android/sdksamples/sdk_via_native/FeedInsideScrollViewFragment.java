@@ -64,6 +64,7 @@ public class FeedInsideScrollViewFragment extends BaseTaboolaFragment {
         //used for enable horizontal scroll
         HashMap<String, String> optionalPageCommands = new HashMap<>();
         optionalPageCommands.put("enableHorizontalScroll", "true");
+        optionalPageCommands.put("useOnlineTemplate", "true");
         mTaboolaWidget.setOptionalPageCommands(optionalPageCommands);
 
         mTaboolaWidget.getLayoutParams().height = SdkDetailsHelper.getDisplayHeight(context);
