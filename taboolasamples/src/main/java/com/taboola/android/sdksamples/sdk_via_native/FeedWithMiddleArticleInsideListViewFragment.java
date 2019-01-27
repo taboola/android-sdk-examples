@@ -27,6 +27,8 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
      * We recommend using {@link android.support.v7.widget.RecyclerView
      */
 
+    private static final String TABOOLA_VIEW_ID = "123456";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,7 +60,8 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Mid Article")
                 .setMode("alternating-widget-with-video-1-on-1")
-                .setTargetType("mix");
+                .setTargetType("mix")
+                .setViewId(TABOOLA_VIEW_ID); // setViewId - used in order to prevent duplicate recommendations between widgets on the same page view
 
         taboolaWidget.fetchContent();
     }
@@ -71,6 +74,7 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
                 .setPlacement("Feed with video")
                 .setMode("thumbs-feed-01")
                 .setTargetType("mix")
+                .setViewId(TABOOLA_VIEW_ID)
                 .setInterceptScroll(true);
 
         taboolaWidget.fetchContent();

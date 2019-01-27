@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class FeedWithMiddleArticleInsideRecycleViewFragment extends Fragment {
-
+    private static final String TABOOLA_VIEW_ID = "123456";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -55,7 +55,8 @@ public class FeedWithMiddleArticleInsideRecycleViewFragment extends Fragment {
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Mid Article")
                 .setMode("alternating-widget-without-video-1-on-1")
-                .setTargetType("mix");
+                .setTargetType("mix")
+                .setViewId(TABOOLA_VIEW_ID); // setViewId - used in order to prevent duplicate recommendations between widgets on the same page view
 
         HashMap<String, String> optionalPageCommands = new HashMap<>();
         optionalPageCommands.put("useOnlineTemplate", "true");
@@ -71,6 +72,7 @@ public class FeedWithMiddleArticleInsideRecycleViewFragment extends Fragment {
                 .setPlacement("Feed without video")
                 .setMode("thumbs-feed-01")
                 .setTargetType("mix")
+                .setViewId(TABOOLA_VIEW_ID)
                 .setInterceptScroll(true);
 
         HashMap<String, String> optionalPageCommands = new HashMap<>();
