@@ -81,6 +81,11 @@ public class FeedWithMiddleArticleInsideRecycleViewFragment extends Fragment {
         taboolaWidget.fetchContent();
     }
 
+    /**
+     * if you are using {@link RecyclerView.Adapter#notifyDataSetChanged()} then you need to add keepDependencies flag
+     *
+     * @see WidgetDynamicThemeChange where you can see full example how to use this flag.
+     */
     static class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private final List<ListItemsGenerator.FeedListItem> mData;

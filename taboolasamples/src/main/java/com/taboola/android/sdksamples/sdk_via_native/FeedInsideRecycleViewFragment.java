@@ -22,6 +22,7 @@ import com.taboola.android.utils.SdkDetailsHelper;
 import java.util.HashMap;
 import java.util.List;
 
+
 public class FeedInsideRecycleViewFragment extends BaseTaboolaFragment {
 
 
@@ -59,7 +60,11 @@ public class FeedInsideRecycleViewFragment extends BaseTaboolaFragment {
         return taboolaWidget;
     }
 
-
+    /**
+     * if you are using {@link RecyclerView.Adapter#notifyDataSetChanged()} then you need to add keepDependencies flag
+     *
+     * @see WidgetDynamicThemeChange where you can see full example how to use this flag.
+     */
     static class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private final List<ListItemsGenerator.FeedListItem> mData;

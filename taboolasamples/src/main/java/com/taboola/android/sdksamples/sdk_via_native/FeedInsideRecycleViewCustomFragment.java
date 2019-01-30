@@ -22,6 +22,7 @@ import com.taboola.android.utils.SdkDetailsHelper;
 import java.util.HashMap;
 import java.util.List;
 
+
 public class FeedInsideRecycleViewCustomFragment extends Fragment implements ScrollToTopListener {
 
     private RecyclerView mRecyclerView;
@@ -73,6 +74,11 @@ public class FeedInsideRecycleViewCustomFragment extends Fragment implements Scr
         mAdapter.removeOnScrollListener();
     }
 
+    /**
+     * if you are using {@link RecyclerView.Adapter#notifyDataSetChanged()} then you need to add keepDependencies flag
+     *
+     * @see WidgetDynamicThemeChange where you can see full example how to use this flag.
+     */
     static class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 

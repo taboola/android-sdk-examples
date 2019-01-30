@@ -21,6 +21,14 @@ import com.taboola.android.sdksamples.R;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * in this example we are using keepDependencies flag, You should call this flag in case you are calling
+ * {@link RecyclerView.Adapter#notifyDataSetChanged()}, in order to make taboolaWidget keep it's dependencies.
+ * If this flag is set to true, you need to call TaboolaWidget.onDestroy() once the adapter is going to be cleared,
+ *
+ * @see #onDestroy()
+ * @see DynamicRecyclerViewAdapter#createTaboolaWidget(Context)
+ */
 public class WidgetDynamicThemeChange extends Fragment {
 
     private DynamicRecyclerViewAdapter mAdapter;
@@ -76,10 +84,6 @@ public class WidgetDynamicThemeChange extends Fragment {
 
         private static TaboolaWidget createTaboolaWidget(Context context) {
             TaboolaWidget taboolaWidget = new TaboolaWidget(context);
-
-            // You should call this flag in case you are calling notifyDataSetChanged in order to make taboolaWidget keepDependencies.
-            // if this flag is set to true, you need to call TaboolaWidget.onDestroy() once the adapter is going to be cleared,
-            // in this sample it's in the onDestroy method of the fragment
             HashMap<String, String> optionalPageCommands = new HashMap<>();
             optionalPageCommands.put("keepDependencies", "true");
             optionalPageCommands.put("useOnlineTemplate", "true");
