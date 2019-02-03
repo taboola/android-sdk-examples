@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.taboola.android.sdksamples.sdk_via_js.MidWidgetWithFeedJsFragment;
+import com.taboola.android.sdksamples.sdk_via_js.SplitFeedJsFragment;
+import com.taboola.android.sdksamples.sdk_via_js.ViewPagerViaJsFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedInsideRecycleViewCustomFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideListViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideRecycleViewFragment;
@@ -18,9 +21,6 @@ import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInside
 import com.taboola.android.sdksamples.sdk_via_native.SimpleWidgetFragment;
 import com.taboola.android.sdksamples.sdk_via_native.ViewPagerFragment;
 import com.taboola.android.sdksamples.sdk_via_native.WidgetDynamicThemeChange;
-import com.taboola.android.sdksamples.std_via_js.MidWidgetWithFeedJsFragment;
-import com.taboola.android.sdksamples.std_via_js.SplitFeedJsFragment;
-import com.taboola.android.sdksamples.std_via_js.ViewPagerViaJsFragment;
 
 public class MenuFragment extends Fragment implements View.OnClickListener {
 
