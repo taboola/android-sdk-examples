@@ -12,7 +12,7 @@ public class ViewPagerFragment extends BaseTabFragment<BaseTaboolaFragment> {
     protected void setupViewPagerAdapter(FragmentsAdapter<BaseTaboolaFragment> adapter) {
         super.setupViewPagerAdapter(adapter);
         String viewId = Long.toString(System.currentTimeMillis());
-        adapter.addFragment(FeedInsideRecycleViewFragment.getInstance(viewId));
+        adapter.addFragment(FeedInsideRecyclerViewFragment.getInstance(viewId));
         adapter.addFragment(FeedInsideScrollViewFragment.getInstance(viewId));
     }
 
@@ -22,7 +22,7 @@ public class ViewPagerFragment extends BaseTabFragment<BaseTaboolaFragment> {
 
         switch (currentItem) {
             case 0:
-                return "FeedInsideRecycleView";
+                return "FeedInsideRecyclerView";
             case 1:
                 return "FeedInsideScrollView";
 

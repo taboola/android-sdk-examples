@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class FeedInsideRecycleViewCustomFragment extends Fragment implements ScrollToTopListener {
+public class FeedInsideRecyclerViewCustomFragment extends Fragment implements ScrollToTopListener {
 
     private RecyclerView mRecyclerView;
     private CustomAdapter mAdapter;
