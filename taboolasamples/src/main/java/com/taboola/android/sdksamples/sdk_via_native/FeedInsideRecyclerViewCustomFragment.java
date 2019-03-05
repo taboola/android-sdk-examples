@@ -144,7 +144,7 @@ public class FeedInsideRecyclerViewCustomFragment extends Fragment implements Sc
                     mGlobalTaboolaView.setScrollEnabled(mEnableWidgetScroll);
                     HashMap<String, String> optionalPageCommands = new HashMap<>();
                     optionalPageCommands.put("useOnlineTemplate", "true");
-                    mGlobalTaboolaView.setOptionalPageCommands(optionalPageCommands);
+                    mGlobalTaboolaView.setExtraProperties(optionalPageCommands);
                     return new ViewHolderTaboola(mGlobalTaboolaView);
 
                 default:

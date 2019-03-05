@@ -48,7 +48,7 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
         taboolaWidget.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
         HashMap<String, String> optionalPageCommands = new HashMap<>();
         optionalPageCommands.put("useOnlineTemplate", "true");
-        taboolaWidget.setOptionalPageCommands(optionalPageCommands);
+        taboolaWidget.setExtraProperties(optionalPageCommands);
         return taboolaWidget;
     }
 

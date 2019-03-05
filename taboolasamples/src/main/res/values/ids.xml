@@ -17,6 +17,7 @@
     <item name="std_view_pager" type="id" />
     <item name="js_view_pager" type="id" />
     <item name="std_widget_xml" type="id" />
+    <item name="std_widget_oc_click" type="id"/>
 
 
 </resources>

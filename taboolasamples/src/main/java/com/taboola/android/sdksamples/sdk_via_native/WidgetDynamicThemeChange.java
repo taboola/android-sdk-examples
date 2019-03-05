@@ -87,7 +87,7 @@ public class WidgetDynamicThemeChange extends Fragment {
             HashMap<String, String> optionalPageCommands = new HashMap<>();
             optionalPageCommands.put("keepDependencies", "true");
             optionalPageCommands.put("useOnlineTemplate", "true");
-            taboolaWidget.setOptionalPageCommands(optionalPageCommands);
+            taboolaWidget.setExtraProperties(optionalPageCommands);
 
             taboolaWidget.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             return taboolaWidget;

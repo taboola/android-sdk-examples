@@ -20,7 +20,7 @@ public class SimpleWidgetFragment extends Fragment {
         TaboolaWidget taboolaWidget = view.findViewById(R.id.taboola_view);
         HashMap<String, String> optionalPageCommands = new HashMap<>();
         optionalPageCommands.put("useOnlineTemplate", "true");
-        taboolaWidget.setOptionalPageCommands(optionalPageCommands);
+        taboolaWidget.setExtraProperties(optionalPageCommands);
         taboolaWidget.fetchContent();
         return view;
     }

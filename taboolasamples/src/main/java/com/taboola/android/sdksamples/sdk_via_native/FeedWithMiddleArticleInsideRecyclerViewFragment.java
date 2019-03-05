@@ -60,7 +60,7 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment {
 
         HashMap<String, String> optionalPageCommands = new HashMap<>();
         optionalPageCommands.put("useOnlineTemplate", "true");
-        taboolaWidget.setOptionalPageCommands(optionalPageCommands);
+        taboolaWidget.setExtraProperties(optionalPageCommands);
         taboolaWidget.fetchContent();
     }
 
@@ -77,7 +77,7 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment {
 
         HashMap<String, String> optionalPageCommands = new HashMap<>();
         optionalPageCommands.put("useOnlineTemplate", "true");
-        taboolaWidget.setOptionalPageCommands(optionalPageCommands);
+        taboolaWidget.setExtraProperties(optionalPageCommands);
         taboolaWidget.fetchContent();
     }
 

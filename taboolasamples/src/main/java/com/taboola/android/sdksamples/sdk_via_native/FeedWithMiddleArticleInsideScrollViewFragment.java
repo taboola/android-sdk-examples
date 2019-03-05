@@ -44,7 +44,7 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment impl
                 .setViewId(TABOOLA_VIEW_ID); // setViewId - used in order to prevent duplicate recommendations between widgets on the same page view
         HashMap<String, String> optionalPageCommands = new HashMap<>();
         optionalPageCommands.put("useOnlineTemplate", "true");
-        taboolaWidget.setOptionalPageCommands(optionalPageCommands);
+        taboolaWidget.setExtraProperties(optionalPageCommands);
         taboolaWidget.fetchContent();
     }
 
@@ -62,7 +62,7 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment impl
         taboolaWidget.getLayoutParams().height = SdkDetailsHelper.getDisplayHeight(taboolaWidget.getContext());
         HashMap<String, String> optionalPageCommands = new HashMap<>();
         optionalPageCommands.put("useOnlineTemplate", "true");
-        taboolaWidget.setOptionalPageCommands(optionalPageCommands);
+        taboolaWidget.setExtraProperties(optionalPageCommands);
         taboolaWidget.fetchContent();
     }
 
