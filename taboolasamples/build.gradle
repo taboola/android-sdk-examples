@@ -24,7 +24,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.taboola:android-sdk:2.1.2'
+    implementation 'com.taboola:android-sdk:2.2.0'
 
     // include to have clicks opened in chrome tabs rather than in a default browser (mandatory)
     implementation 'com.android.support:customtabs:28.0.0'
