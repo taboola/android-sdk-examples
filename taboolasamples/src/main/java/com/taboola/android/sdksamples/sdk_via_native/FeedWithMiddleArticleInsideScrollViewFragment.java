@@ -59,7 +59,7 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment impl
                 .setViewId(TABOOLA_VIEW_ID)
                 .setInterceptScroll(true);
 
-        taboolaWidget.getLayoutParams().height = SdkDetailsHelper.getDisplayHeight(taboolaWidget.getContext());
+        taboolaWidget.getLayoutParams().height = SdkDetailsHelper.getDisplayHeight(taboolaWidget.getContext()) * 2;
         HashMap<String, String> optionalPageCommands = new HashMap<>();
         optionalPageCommands.put("useOnlineTemplate", "true");
         taboolaWidget.setExtraProperties(optionalPageCommands);
