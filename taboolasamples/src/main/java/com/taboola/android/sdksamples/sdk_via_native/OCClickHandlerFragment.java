@@ -7,10 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.taboola.android.TaboolaWidget;
 import com.taboola.android.listeners.TaboolaEventListener;
-import com.taboola.android.sdksamples.InAppBrowser;
 import com.taboola.android.sdksamples.R;
 import com.taboola.android.utils.SdkDetailsHelper;
 
@@ -57,9 +57,8 @@ public class OCClickHandlerFragment extends Fragment implements TaboolaEventList
     @Override
     public boolean taboolaViewItemClickHandler(String url, boolean isOrganic) {
         if (isOrganic && getActivity() != null) {
-            getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).add(R.id.container,
-                    InAppBrowser.getInstance(url)).commitAllowingStateLoss();
-
+            //in real app you should use this url to open organic url inside your app
+            Toast.makeText(getContext(), "mock load url: " + url, Toast.LENGTH_LONG).show();
             //Returning false - the click's default behavior is aborted. The app should display the Taboola Recommendation content on its own (for example, using an in-app browser).
             return false;
         }
