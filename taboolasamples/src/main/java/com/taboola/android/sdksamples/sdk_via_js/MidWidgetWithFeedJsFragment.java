@@ -103,7 +103,7 @@ public class MidWidgetWithFeedJsFragment extends Fragment implements OnRenderLis
     }
 
     @Override
-    public void onOrientationChange(WebView webView, int height) {
-        Log.d(TAG, "onOrientationChange() called with: webView = [" + webView + "], height = [" + height + "]");
+    public void onOrientationChange(WebView webView, int i) {
+        Log.d(TAG, "onOrientationChange() called with: webView = [" + webView + "], i = [" + i + "]");
     }
 }
