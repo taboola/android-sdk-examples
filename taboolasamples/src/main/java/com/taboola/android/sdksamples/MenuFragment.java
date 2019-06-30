@@ -19,6 +19,7 @@ import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInside
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideRecyclerViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideScrollViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.OCClickHandlerFragment;
+import com.taboola.android.sdksamples.sdk_via_native.RecyclerViewPreloadFragment;
 import com.taboola.android.sdksamples.sdk_via_native.SimpleWidgetFragment;
 import com.taboola.android.sdksamples.sdk_via_native.ViewPagerFragment;
 import com.taboola.android.sdksamples.sdk_via_native.WidgetDynamicThemeChange;
@@ -60,6 +61,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         addButton(getString(R.string.std_mid_article_with_feed_lnr), R.id.std_mid_article_with_feed_lnr, viewGroup);
         addButton(getString(R.string.std_mid_article_with_feed_rv), R.id.std_mid_article_with_feed_rv, viewGroup);
         addButton(getString(R.string.std_mid_article_with_feed_rv_manual), R.id.std_mid_article_with_feed_rv_manual, viewGroup);
+        addButton(getString(R.string.std_mid_article_preload), R.id.std_widget_preload, viewGroup);
         addButton(getString(R.string.std_view_pager), R.id.std_view_pager, viewGroup);
         addButton(getString(R.string.std_mid_article_with_feed_lv), R.id.std_mid_article_with_feed_lv, viewGroup);
         addButton(getString(R.string.std_widget_dynamic_theme), R.id.std_widget_dynamic_theme, viewGroup);
@@ -123,6 +125,11 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
             case R.id.std_widget_oc_click:
                 fragmentToOpen = new OCClickHandlerFragment();
+                break;
+
+
+            case R.id.std_widget_preload:
+                fragmentToOpen = new RecyclerViewPreloadFragment();
                 break;
         }
 
