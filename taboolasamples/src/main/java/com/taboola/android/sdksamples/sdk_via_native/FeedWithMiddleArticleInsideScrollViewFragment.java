@@ -23,13 +23,14 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment impl
     private static final String TABOOLA_VIEW_ID = "123456";
 
     GlobalNotificationReceiver mGlobalNotificationReceiver = new GlobalNotificationReceiver();
+    private TaboolaWidget mTaboolaWidgetBottom;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_standard, container, false);
         buildMiddleArticleWidget(view.findViewById(R.id.taboola_widget_middle));
-        buildBelowArticleWidget(view.findViewById(R.id.taboola_widget_below_article));
+        mTaboolaWidgetBottom = view.findViewById(R.id.taboola_widget_below_article);
         return view;
     }
 
@@ -84,6 +85,9 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment impl
     @Override
     public void taboolaDidReceiveAd(TaboolaWidget taboolaWidget) {
         Log.d(TAG, "taboolaDidReceiveAd() called with: taboolaWidget = [" + taboolaWidget + "]");
+        if (taboolaWidget.getId() == R.id.taboola_widget_middle) {
+            buildBelowArticleWidget(mTaboolaWidgetBottom);
+        }
     }
 
     @Override
@@ -99,6 +103,9 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment impl
     @Override
     public void taboolaDidFailAd(TaboolaWidget taboolaWidget, String reason) {
         Log.d(TAG, "taboolaDidFailAd() called with: taboolaWidget = [" + taboolaWidget + "], reason = [" + reason + "]");
+        if (taboolaWidget.getId() == R.id.taboola_widget_middle) {
+            buildBelowArticleWidget(mTaboolaWidgetBottom);
+        }
     }
 
 }

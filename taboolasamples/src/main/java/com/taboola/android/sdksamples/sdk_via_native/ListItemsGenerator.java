@@ -110,6 +110,10 @@ public class ListItemsGenerator {
 
 
     public static List<FeedListItem> getGeneratedDataForWidgetDynamic() {
+        return getGeneratedDataForWidgetDynamic(false);
+    }
+
+    public static List<FeedListItem> getGeneratedDataForWidgetDynamic(boolean withBottomView) {
         List<FeedListItem> randomImages = new ArrayList<>();
         randomImages.add(new RandomItem(Color.parseColor("#c9eae1")));
         randomImages.add(new RandomItem(Color.parseColor("#acdadc")));
@@ -117,6 +121,9 @@ public class ListItemsGenerator {
         randomImages.add(new RandomItem(Color.parseColor("#fada5e")));
         randomImages.add(new RandomItem(Color.parseColor("#d0e4b2")));
         randomImages.add(new RandomItem(Color.parseColor("#d7858e")));
+        if (withBottomView) {
+            randomImages.add(new TaboolaView());
+        }
         return randomImages;
     }
 }

@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.taboola.android.TaboolaWidget;
+import com.taboola.android.listeners.TaboolaDetectAdEventsListener;
 import com.taboola.android.sdksamples.R;
 import com.taboola.android.utils.SdkDetailsHelper;
 
@@ -22,23 +23,19 @@ import java.util.HashMap;
 import java.util.List;
 
 public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment {
-    private static final String TABOOLA_VIEW_ID = "123456";
+
+    private static TaboolaWidget mMiddleTaboolaWidget;
+    private static TaboolaWidget mBottomTaboolaWidget;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mMiddleTaboolaWidget = createTaboolaWidget(inflater.getContext(), false);
+        mBottomTaboolaWidget = createTaboolaWidget(inflater.getContext(), true);
+
+        buildMiddleArticleWidget(mMiddleTaboolaWidget);
         return inflater.inflate(R.layout.fragment_rv_sample, container, false);
     }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        RecyclerView recyclerView = view.findViewById(R.id.feed_rv);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(new RecyclerViewAdapter());
-    }
-
 
     static TaboolaWidget createTaboolaWidget(Context context, boolean infiniteWidget) {
         TaboolaWidget taboolaWidget = new TaboolaWidget(context);
@@ -53,10 +50,21 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment {
                 .setPublisher("sdk-tester")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
-                .setPlacement("Mid Article")
-                .setMode("alternating-widget-without-video-1-on-1")
+                .setPlacement("Below Article")
+                .setMode("alternating-widget-with-video")
                 .setTargetType("mix")
-                .setViewId(TABOOLA_VIEW_ID); // setViewId - used in order to prevent duplicate recommendations between widgets on the same page view
+                .setTaboolaDetectAdEventsListener(new TaboolaDetectAdEventsListener() {
+                    @Override
+                    public void onTaboolaDidReceiveAd(TaboolaWidget taboolaWidget) {
+                        buildBottomArticleWidget(mBottomTaboolaWidget);
+                    }
+
+                    @Override
+                    public void onTaboolaDidFailAd(String s) {
+                        buildBottomArticleWidget(mBottomTaboolaWidget);
+                    }
+                });
+
 
         HashMap<String, String> optionalPageCommands = new HashMap<>();
         optionalPageCommands.put("useOnlineTemplate", "true");
@@ -64,16 +72,16 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment {
         taboolaWidget.fetchContent();
     }
 
-    private static void buildBelowArticleWidget(TaboolaWidget taboolaWidget) {
+    private static void buildBottomArticleWidget(TaboolaWidget taboolaWidget) {
         taboolaWidget
                 .setPublisher("sdk-tester")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
-                .setPlacement("Feed without video")
+                .setPlacement("Feed with video")
                 .setMode("thumbs-feed-01")
                 .setTargetType("mix")
-                .setViewId(TABOOLA_VIEW_ID)
                 .setInterceptScroll(true);
+
 
         HashMap<String, String> optionalPageCommands = new HashMap<>();
         optionalPageCommands.put("useOnlineTemplate", "true");
@@ -81,20 +89,26 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment {
         taboolaWidget.fetchContent();
     }
 
-    /**
-     * if you are using {@link RecyclerView.Adapter#notifyDataSetChanged()} then you need to add keepDependencies flag
-     *
-     * @see WidgetDynamicThemeChange where you can see full example how to use this flag.
-     */
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        RecyclerView recyclerView = view.findViewById(R.id.feed_rv);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(new RecyclerViewAdapter(mMiddleTaboolaWidget, mBottomTaboolaWidget));
+    }
+
     static class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private final List<ListItemsGenerator.FeedListItem> mData;
-        private TaboolaWidget mMiddleTaboolaWidget;
-        private TaboolaWidget mInfiniteTaboolaView;
+        private final TaboolaWidget mMiddleTaboolaWidget;
+        private final TaboolaWidget mBottomTaboolaWidget;
 
 
-        RecyclerViewAdapter() {
-            mData = ListItemsGenerator.getGeneratedData(true);
+        RecyclerViewAdapter(TaboolaWidget taboolaWidget, TaboolaWidget taboolaWidgetBottom) {
+            mData = ListItemsGenerator.getGeneratedDataForWidgetDynamic(true);
+            mMiddleTaboolaWidget = taboolaWidget;
+            mBottomTaboolaWidget = taboolaWidgetBottom;
         }
 
 
@@ -122,18 +136,10 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment {
             switch (viewType) {
 
                 case ListItemsGenerator.FeedListItem.ItemType.TABOOLA_MID_ITEM:
-                    if (mMiddleTaboolaWidget == null) {
-                        mMiddleTaboolaWidget = createTaboolaWidget(parent.getContext(), false);
-                        buildMiddleArticleWidget(mMiddleTaboolaWidget);
-                    }
                     return new ViewHolderTaboola(mMiddleTaboolaWidget);
 
                 case ListItemsGenerator.FeedListItem.ItemType.TABOOLA_ITEM:
-                    if (mInfiniteTaboolaView == null) {
-                        mInfiniteTaboolaView = createTaboolaWidget(parent.getContext(), true);
-                        buildBelowArticleWidget(mInfiniteTaboolaView);
-                    }
-                    return new ViewHolderTaboola(mInfiniteTaboolaView);
+                    return new ViewHolderTaboola(mBottomTaboolaWidget);
 
                 default:
                 case ListItemsGenerator.FeedListItem.ItemType.RANDOM_ITEM:

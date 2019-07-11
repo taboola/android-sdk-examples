@@ -71,7 +71,7 @@ public class WidgetDynamicThemeChange extends Fragment {
         private final List<ListItemsGenerator.FeedListItem> mData;
         private TaboolaWidget mTaboolaWidget;
         private Theme mTheme;
-
+        private boolean mThemeChanged = false;
 
         DynamicRecyclerViewAdapter(Theme theme) {
             mData = ListItemsGenerator.getGeneratedDataForWidgetDynamic();
@@ -129,10 +129,7 @@ public class WidgetDynamicThemeChange extends Fragment {
 
         public void changeTheme(boolean isChecked) {
             mTheme = isChecked ? Theme.BLACK : Theme.WHITE;
-            if (mTaboolaWidget != null) {
-                mTaboolaWidget.reset();
-                loadWidget(mTaboolaWidget);
-            }
+            mThemeChanged = true;
         }
 
 
@@ -140,8 +137,6 @@ public class WidgetDynamicThemeChange extends Fragment {
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             switch (viewType) {
-
-
                 case ListItemsGenerator.FeedListItem.ItemType.TABOOLA_MID_ITEM:
                     if (mTaboolaWidget == null) {
                         mTaboolaWidget = createTaboolaWidget(parent.getContext());
@@ -181,6 +176,14 @@ public class WidgetDynamicThemeChange extends Fragment {
                     vh.itemView.setBackgroundColor(Color.TRANSPARENT);
                     vh.textView.setTextColor(Color.BLACK);
                 }
+            } else if (item.type == ListItemsGenerator.FeedListItem.ItemType.TABOOLA_MID_ITEM) {
+                ViewHolderTaboola viewHolderTaboola = (ViewHolderTaboola) holder;
+                final TaboolaWidget taboolaWidget = viewHolderTaboola.mTaboolaWidget;
+                if (mThemeChanged) {
+                    taboolaWidget.reset();
+                    taboolaWidget.post(() -> loadWidget(taboolaWidget));
+                    mThemeChanged = false;
+                }
             }
         }
 
@@ -204,8 +207,11 @@ public class WidgetDynamicThemeChange extends Fragment {
         }
 
         static class ViewHolderTaboola extends RecyclerView.ViewHolder {
-            ViewHolderTaboola(View view) {
+            private final TaboolaWidget mTaboolaWidget;
+
+            ViewHolderTaboola(TaboolaWidget view) {
                 super(view);
+                mTaboolaWidget = view;
             }
         }
 

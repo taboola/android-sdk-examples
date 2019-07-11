@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.taboola.android.TaboolaWidget;
+import com.taboola.android.listeners.TaboolaDetectAdEventsListener;
 import com.taboola.android.sdksamples.R;
 import com.taboola.android.utils.SdkDetailsHelper;
 
@@ -26,8 +28,10 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
     /**
      * We recommend using {@link android.support.v7.widget.RecyclerView
      */
-
+    private static final String TAG = "FeedWithMiddleArticleIn";
     private static final String TABOOLA_VIEW_ID = "123456";
+    private static TaboolaWidget mTaboolaWidgetBottom;
+    private static TaboolaWidget mTaboolaWidgetMiddle;
 
     @Nullable
     @Override
@@ -38,10 +42,22 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mTaboolaWidgetMiddle = createTaboolaWidget(view.getContext(), false);
+        mTaboolaWidgetBottom = createTaboolaWidget(view.getContext(), true);
+
+        buildMiddleArticleWidget(mTaboolaWidgetMiddle);
+
         ListView listView = view.findViewById(R.id.feed_lv);
-        listView.setAdapter(new ListViewAdapter());
+        listView.setAdapter(new ListViewAdapter(mTaboolaWidgetMiddle, mTaboolaWidgetBottom));
     }
 
+    /**
+     * Helper method to create {@link TaboolaWidget} objects with height of 1 screen (for feed) or WRAP_CONTENT
+     *
+     * @param context
+     * @param infiniteWidget
+     * @return {@link TaboolaWidget} instance
+     */
     static TaboolaWidget createTaboolaWidget(Context context, boolean infiniteWidget) {
         TaboolaWidget taboolaWidget = new TaboolaWidget(context);
         int height = infiniteWidget ? SdkDetailsHelper.getDisplayHeight(context) : ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -59,9 +75,23 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Mid Article")
-                .setMode("alternating-widget-with-video-1-on-1")
+                .setMode("alternating-widget-without-video-1-on-1")
                 .setTargetType("mix")
-                .setViewId(TABOOLA_VIEW_ID); // setViewId - used in order to prevent duplicate recommendations between widgets on the same page view
+                .setViewId(TABOOLA_VIEW_ID) // setViewId - used in order to prevent duplicate recommendations between widgets on the same page view
+                .setTaboolaDetectAdEventsListener(new TaboolaDetectAdEventsListener() { //When Middle Article widget returns - we fetch the below article widget
+                    @Override
+                    public void onTaboolaDidReceiveAd(TaboolaWidget taboolaWidget) {
+                        Log.d(TAG, "onTaboolaDidReceiveAd() called with: taboolaWidget = [" + taboolaWidget + "]");
+                        buildBelowArticleWidget(mTaboolaWidgetBottom);
+                    }
+
+                    @Override
+                    public void onTaboolaDidFailAd(String s) {
+                        Log.d(TAG, "onTaboolaDidFailAd() called with: s = [" + s + "]");
+                        buildBelowArticleWidget(mTaboolaWidgetBottom);
+
+                    }
+                });
 
         taboolaWidget.fetchContent();
     }
@@ -76,19 +106,20 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
                 .setTargetType("mix")
                 .setViewId(TABOOLA_VIEW_ID)
                 .setInterceptScroll(true);
-
         taboolaWidget.fetchContent();
     }
-
 
     static class ListViewAdapter extends BaseAdapter {
 
         private final List<ListItemsGenerator.FeedListItem> mData;
-        private TaboolaWidget mMiddleTaboolaWidget;
+        private TaboolaWidget mTaboolaWidgetMiddle;
+        private TaboolaWidget mTaboolaWidgetBottom;
 
 
-        ListViewAdapter() {
+        ListViewAdapter(TaboolaWidget middleWidget, TaboolaWidget bottomWidget) {
             mData = ListItemsGenerator.getGeneratedData(true);
+            mTaboolaWidgetMiddle = middleWidget;
+            mTaboolaWidgetBottom = bottomWidget;
         }
 
 
@@ -120,16 +151,17 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
             switch (viewType) {
 
                 case ListItemsGenerator.FeedListItem.ItemType.TABOOLA_MID_ITEM:
-                    if (mMiddleTaboolaWidget == null) {
-                        mMiddleTaboolaWidget = createTaboolaWidget(parent.getContext(), false);
-                        buildMiddleArticleWidget(mMiddleTaboolaWidget);
+                    if (mTaboolaWidgetMiddle == null) {
+                        buildMiddleArticleWidget(mTaboolaWidgetMiddle);
                     }
-                    return new ViewHolderTaboola(mMiddleTaboolaWidget, viewType);
+                    return new ViewHolderTaboola(mTaboolaWidgetMiddle, viewType);
+
 
                 case ListItemsGenerator.FeedListItem.ItemType.TABOOLA_ITEM:
-                    TaboolaWidget taboolaWidgetInfinite = createTaboolaWidget(parent.getContext(), true);
-                    buildBelowArticleWidget(taboolaWidgetInfinite);
-                    return new ViewHolderTaboola(taboolaWidgetInfinite, viewType);
+                    if (mTaboolaWidgetBottom == null) {
+                        mTaboolaWidgetBottom = createTaboolaWidget(parent.getContext(), true);
+                    }
+                    return new ViewHolderTaboola(mTaboolaWidgetBottom, viewType);
 
                 default:
                 case ListItemsGenerator.FeedListItem.ItemType.RANDOM_ITEM:
