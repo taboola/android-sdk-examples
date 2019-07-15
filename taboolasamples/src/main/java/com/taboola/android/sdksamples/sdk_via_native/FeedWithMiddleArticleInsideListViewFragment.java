@@ -16,14 +16,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.taboola.android.TaboolaWidget;
-import com.taboola.android.listeners.TaboolaDetectAdEventsListener;
+import com.taboola.android.globalNotifications.GlobalNotificationReceiver;
 import com.taboola.android.sdksamples.R;
 import com.taboola.android.utils.SdkDetailsHelper;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
+public class FeedWithMiddleArticleInsideListViewFragment extends Fragment implements GlobalNotificationReceiver.OnGlobalNotificationsListener {
+
+    private GlobalNotificationReceiver mGlobalNotificationReceiver = new GlobalNotificationReceiver();
 
     /**
      * We recommend using {@link android.support.v7.widget.RecyclerView
@@ -78,22 +80,7 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
                 .setMode("alternating-widget-without-video-1-on-1")
                 .setTargetType("mix")
                 .setViewId(TABOOLA_VIEW_ID) // setViewId - used in order to prevent duplicate recommendations between widgets on the same page view
-                .setTaboolaDetectAdEventsListener(new TaboolaDetectAdEventsListener() { //When Middle Article widget returns - we fetch the below article widget
-                    @Override
-                    public void onTaboolaDidReceiveAd(TaboolaWidget taboolaWidget) {
-                        Log.d(TAG, "onTaboolaDidReceiveAd() called with: taboolaWidget = [" + taboolaWidget + "]");
-                        buildBelowArticleWidget(mTaboolaWidgetBottom);
-                    }
-
-                    @Override
-                    public void onTaboolaDidFailAd(String s) {
-                        Log.d(TAG, "onTaboolaDidFailAd() called with: s = [" + s + "]");
-                        buildBelowArticleWidget(mTaboolaWidgetBottom);
-
-                    }
-                });
-
-        taboolaWidget.fetchContent();
+                .fetchContent();
     }
 
     private static void buildBelowArticleWidget(TaboolaWidget taboolaWidget) {
@@ -108,6 +95,47 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
                 .setInterceptScroll(true);
         taboolaWidget.fetchContent();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mGlobalNotificationReceiver.registerNotificationsListener(this);
+        mGlobalNotificationReceiver.registerReceiver(getActivity());
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mGlobalNotificationReceiver.unregisterNotificationsListener();
+        mGlobalNotificationReceiver.unregisterReceiver(getActivity());
+    }
+
+
+    @Override
+    public void taboolaDidReceiveAd(TaboolaWidget taboolaWidget) {
+        if (taboolaWidget == mTaboolaWidgetMiddle) { //When Middle Article widget returns - we fetch the below article widget
+            buildBelowArticleWidget(mTaboolaWidgetBottom);
+        }
+    }
+
+    @Override
+    public void taboolaDidFailAd(TaboolaWidget taboolaWidget, String s) {
+        if (taboolaWidget == mTaboolaWidgetMiddle) { //When Middle Article widget returns - we fetch the below article widget
+            buildBelowArticleWidget(mTaboolaWidgetBottom);
+        }
+    }
+
+    @Override
+    public void taboolaViewResized(TaboolaWidget taboolaWidget, int i) {
+        Log.d(TAG, "taboolaViewResized() called with: taboolaWidget = [" + taboolaWidget + "], i = [" + i + "]");
+    }
+
+    @Override
+    public void taboolaItemDidClick(TaboolaWidget taboolaWidget) {
+        Log.d(TAG, "taboolaItemDidClick() called with: taboolaWidget = [" + taboolaWidget + "]");
+    }
+
 
     static class ListViewAdapter extends BaseAdapter {
 
@@ -169,7 +197,6 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
                     return new RandomImageViewHolder(appCompatImageView, viewType);
             }
         }
-
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {

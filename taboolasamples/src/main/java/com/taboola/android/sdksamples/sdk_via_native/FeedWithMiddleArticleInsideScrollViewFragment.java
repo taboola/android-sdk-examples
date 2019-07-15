@@ -86,7 +86,7 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment impl
     public void taboolaDidReceiveAd(TaboolaWidget taboolaWidget) {
         Log.d(TAG, "taboolaDidReceiveAd() called with: taboolaWidget = [" + taboolaWidget + "]");
         if (taboolaWidget.getId() == R.id.taboola_widget_middle) {
-            buildBelowArticleWidget(mTaboolaWidgetBottom);
+            buildBelowArticleWidget(mTaboolaWidgetBottom); //fetch content for the 2nd taboola asset only after completion of 1st item
         }
     }
 
@@ -104,7 +104,7 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment impl
     public void taboolaDidFailAd(TaboolaWidget taboolaWidget, String reason) {
         Log.d(TAG, "taboolaDidFailAd() called with: taboolaWidget = [" + taboolaWidget + "], reason = [" + reason + "]");
         if (taboolaWidget.getId() == R.id.taboola_widget_middle) {
-            buildBelowArticleWidget(mTaboolaWidgetBottom);
+            buildBelowArticleWidget(mTaboolaWidgetBottom); //fetch content for the 2nd taboola asset only after completion of 1st item
         }
     }
 

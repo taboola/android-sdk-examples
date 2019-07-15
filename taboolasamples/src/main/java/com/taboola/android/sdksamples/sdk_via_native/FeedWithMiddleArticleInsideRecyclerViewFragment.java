@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +16,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.taboola.android.TaboolaWidget;
-import com.taboola.android.listeners.TaboolaDetectAdEventsListener;
+import com.taboola.android.globalNotifications.GlobalNotificationReceiver;
 import com.taboola.android.sdksamples.R;
 import com.taboola.android.utils.SdkDetailsHelper;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment {
+public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment implements GlobalNotificationReceiver.OnGlobalNotificationsListener {
+
+    private static final String TAG = "FeedWithMiddleArticle";
+    private static final String TABOOLA_VIEW_ID = "123456";
 
     private static TaboolaWidget mMiddleTaboolaWidget;
     private static TaboolaWidget mBottomTaboolaWidget;
+
+    private GlobalNotificationReceiver mGlobalNotificationReceiver = new GlobalNotificationReceiver();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -50,21 +56,10 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment {
                 .setPublisher("sdk-tester")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
-                .setPlacement("Below Article")
-                .setMode("alternating-widget-with-video")
+                .setPlacement("Mid Article")
+                .setMode("alternating-widget-without-video-1-on-1")
                 .setTargetType("mix")
-                .setTaboolaDetectAdEventsListener(new TaboolaDetectAdEventsListener() {
-                    @Override
-                    public void onTaboolaDidReceiveAd(TaboolaWidget taboolaWidget) {
-                        buildBottomArticleWidget(mBottomTaboolaWidget);
-                    }
-
-                    @Override
-                    public void onTaboolaDidFailAd(String s) {
-                        buildBottomArticleWidget(mBottomTaboolaWidget);
-                    }
-                });
-
+                .setViewId(TABOOLA_VIEW_ID);
 
         HashMap<String, String> optionalPageCommands = new HashMap<>();
         optionalPageCommands.put("useOnlineTemplate", "true");
@@ -77,11 +72,12 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment {
                 .setPublisher("sdk-tester")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
-                .setPlacement("Feed with video")
+                .setPlacement("Feed without video")
                 .setMode("thumbs-feed-01")
                 .setTargetType("mix")
-                .setInterceptScroll(true);
+                .setViewId(TABOOLA_VIEW_ID);
 
+        taboolaWidget.setInterceptScroll(true);
 
         HashMap<String, String> optionalPageCommands = new HashMap<>();
         optionalPageCommands.put("useOnlineTemplate", "true");
@@ -96,6 +92,21 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(new RecyclerViewAdapter(mMiddleTaboolaWidget, mBottomTaboolaWidget));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mGlobalNotificationReceiver.registerNotificationsListener(this);
+        mGlobalNotificationReceiver.registerReceiver(getActivity());
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mGlobalNotificationReceiver.unregisterNotificationsListener();
+        mGlobalNotificationReceiver.unregisterReceiver(getActivity());
     }
 
     static class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -181,4 +192,32 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment {
             }
         }
     }
+
+    @Override
+    public void taboolaDidReceiveAd(TaboolaWidget taboolaWidget) {
+        Log.d(TAG, "taboolaDidReceiveAd() called with: taboolaWidget = [" + taboolaWidget + "]");
+        if (taboolaWidget == mMiddleTaboolaWidget) {
+            Log.d(TAG, "taboolaDidReceiveAd() called with: taboolaWidget = [" + taboolaWidget + "]");
+            buildBottomArticleWidget(mBottomTaboolaWidget); //fetch content for the 2nd taboola asset only after completion of 1st item
+        }
+    }
+
+    @Override
+    public void taboolaDidFailAd(TaboolaWidget taboolaWidget, String s) {
+        if (taboolaWidget.getId() == R.id.taboola_widget_middle) {
+            buildBottomArticleWidget(mBottomTaboolaWidget); //fetch content for the 2nd taboola asset only after completion of 1st item
+        }
+    }
+
+    @Override
+    public void taboolaViewResized(TaboolaWidget taboolaWidget, int i) {
+        Log.d(TAG, "taboolaViewResized() called with: taboolaWidget = [" + taboolaWidget + "], i = [" + i + "]");
+    }
+
+    @Override
+    public void taboolaItemDidClick(TaboolaWidget taboolaWidget) {
+        Log.d(TAG, "taboolaItemDidClick() called with: taboolaWidget = [" + taboolaWidget + "]");
+
+    }
+
 }
