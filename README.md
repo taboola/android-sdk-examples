@@ -1,6 +1,6 @@
 # Taboola Android SDK Examples
 
-Latest Android SDK Version: 2.3.0 (02/07/2019)
+Latest Android SDK Version: 2.3.3 (07/08/2019)
 
 Taboola SDK allows publisher to display Taboola's Widgets and Feed within their Android apps
 
