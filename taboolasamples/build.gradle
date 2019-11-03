@@ -24,7 +24,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.taboola:android-sdk:2.3.0'
+    implementation 'com.taboola:android-sdk:2.3.6'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
 
     // include to have clicks opened in chrome tabs rather than in a default browser (mandatory)

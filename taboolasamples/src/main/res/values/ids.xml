@@ -3,8 +3,6 @@
     <item name="api_view_title" type="id" />
     <item name="api_view_branding" type="id" />
     <item name="api_view_description" type="id" />
-
-
     <item name="api_4_items_widget" type="id" />
     <item name="api_feed" type="id" />
     <item name="js_split" type="id" />
@@ -19,6 +17,7 @@
     <item name="std_widget_xml" type="id" />
     <item name="std_widget_oc_click" type="id"/>
     <item name="std_widget_preload" type="id"/>
+    <item name="std_feed_pull_to_refresh" type="id"/>
 
 
 </resources>
