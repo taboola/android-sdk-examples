@@ -18,6 +18,7 @@
     <item name="std_widget_oc_click" type="id"/>
     <item name="std_widget_preload" type="id"/>
     <item name="std_feed_pull_to_refresh" type="id"/>
+    <item name="std_feed_lazy_loading_rv" type="id" />
 
 
 </resources>
