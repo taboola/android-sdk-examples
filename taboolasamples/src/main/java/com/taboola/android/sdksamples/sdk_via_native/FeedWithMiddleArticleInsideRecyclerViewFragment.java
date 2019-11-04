@@ -25,7 +25,7 @@ import java.util.List;
 
 public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment implements GlobalNotificationReceiver.OnGlobalNotificationsListener {
 
-    private static final String TAG = "FeedWithMiddleArticle";
+    private static final String TAG             = "FeedWithMiddleArticle";
     private static final String TABOOLA_VIEW_ID = "123456";
 
     private static TaboolaWidget mMiddleTaboolaWidget;
@@ -45,7 +45,7 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment im
 
     static TaboolaWidget createTaboolaWidget(Context context, boolean infiniteWidget) {
         TaboolaWidget taboolaWidget = new TaboolaWidget(context);
-        int height = infiniteWidget ? SdkDetailsHelper.getDisplayHeight(context) * 2 : ViewGroup.LayoutParams.WRAP_CONTENT;
+        int           height        = infiniteWidget ? SdkDetailsHelper.getDisplayHeight(context) * 2 : ViewGroup.LayoutParams.WRAP_CONTENT;
         taboolaWidget.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
         return taboolaWidget;
     }
@@ -88,7 +88,7 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment im
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerView recyclerView = view.findViewById(R.id.feed_rv);
+        RecyclerView        recyclerView        = view.findViewById(R.id.feed_rv);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(new RecyclerViewAdapter(mMiddleTaboolaWidget, mBottomTaboolaWidget));
@@ -112,8 +112,8 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment im
     static class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private final List<ListItemsGenerator.FeedListItem> mData;
-        private final TaboolaWidget mMiddleTaboolaWidget;
-        private final TaboolaWidget mBottomTaboolaWidget;
+        private final TaboolaWidget                         mMiddleTaboolaWidget;
+        private final TaboolaWidget                         mBottomTaboolaWidget;
 
 
         RecyclerViewAdapter(TaboolaWidget taboolaWidget, TaboolaWidget taboolaWidgetBottom) {
@@ -144,13 +144,16 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment im
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            switch (viewType) {
+            // TODO 需求
+            //  布局大概是 RecyclerView 里面的子item也是一个RecycierView， 然后加载SDK 请求信息流 ，可重新写一个demo 复现下
 
+            View customParent = LayoutInflater.from(parent.getContext()).inflate(R.layout.cust_item_layout, parent, false);
+            switch (viewType) {
                 case ListItemsGenerator.FeedListItem.ItemType.TABOOLA_MID_ITEM:
-                    return new ViewHolderTaboola(mMiddleTaboolaWidget);
+                    return new ViewHolderTaboola((ViewGroup) customParent, mMiddleTaboolaWidget);
 
                 case ListItemsGenerator.FeedListItem.ItemType.TABOOLA_ITEM:
-                    return new ViewHolderTaboola(mBottomTaboolaWidget);
+                    return new ViewHolderTaboola((ViewGroup) customParent, mBottomTaboolaWidget);
 
                 default:
                 case ListItemsGenerator.FeedListItem.ItemType.RANDOM_ITEM:
@@ -165,9 +168,9 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment im
             ListItemsGenerator.FeedListItem item = getItem(position);
 
             if (item.type == ListItemsGenerator.FeedListItem.ItemType.RANDOM_ITEM) {
-                RandomImageViewHolder vh = (RandomImageViewHolder) holder;
+                RandomImageViewHolder         vh         = (RandomImageViewHolder) holder;
                 ListItemsGenerator.RandomItem randomItem = (ListItemsGenerator.RandomItem) item;
-                final ImageView imageView = vh.imageView;
+                final ImageView               imageView  = vh.imageView;
                 imageView.setBackgroundColor(randomItem.color);
                 vh.textView.setText(randomItem.randomText);
             }
@@ -176,7 +179,7 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment im
 
         static class RandomImageViewHolder extends RecyclerView.ViewHolder {
             private final ImageView imageView;
-            private final TextView textView;
+            private final TextView  textView;
 
             RandomImageViewHolder(View view) {
                 super(view);
@@ -187,8 +190,15 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment im
 
         static class ViewHolderTaboola extends RecyclerView.ViewHolder {
 
-            ViewHolderTaboola(View view) {
-                super(view);
+            ViewHolderTaboola(ViewGroup viewGroup, View widget) {
+                super(viewGroup);
+
+                if (widget.getParent() != null) {
+                    ((ViewGroup) widget.getParent()).removeView(widget);
+                }
+
+                viewGroup.addView(widget);
+
             }
         }
     }
