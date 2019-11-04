@@ -99,4 +99,5 @@ These will help you remember what the consumer really wants to engage with and w
         Warp without moon, and we won’t convert a proton.\n
     </string>
     <string name="std_feed_pull_to_refresh">Pull to refresh</string>
+    <string name="std_feed_lazy_loading_rv">Feed Lazy Loading (RecyclerView)</string>
 </resources>

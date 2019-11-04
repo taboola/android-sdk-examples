@@ -15,6 +15,7 @@ import com.taboola.android.sdksamples.sdk_via_js.MidWidgetWithFeedJsFragment;
 import com.taboola.android.sdksamples.sdk_via_js.SplitFeedJsFragment;
 import com.taboola.android.sdksamples.sdk_via_js.ViewPagerViaJsFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedInsideRecyclerViewCustomFragment;
+import com.taboola.android.sdksamples.sdk_via_native.FeedInsideRecyclerViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideListViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideRecyclerViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideScrollViewFragment;
@@ -69,6 +70,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         addButton(getString(R.string.std_widget_xml), R.id.std_widget_xml, viewGroup);
         addButton(getString(R.string.std_widget_oc_click), R.id.std_widget_oc_click, viewGroup);
         addButton(getString(R.string.std_feed_pull_to_refresh), R.id.std_feed_pull_to_refresh, viewGroup);
+        addButton(getString(R.string.std_feed_lazy_loading_rv), R.id.std_feed_lazy_loading_rv, viewGroup);
 
         addHeader(getString(R.string.sdk_via_js), viewGroup);
         addButton(getString(R.string.js_mid_article_with_feed), R.id.js_mid_article_with_feed, viewGroup);
@@ -129,7 +131,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
                 fragmentToOpen = new OCClickHandlerFragment();
                 break;
 
-
             case R.id.std_widget_preload:
                 fragmentToOpen = new RecyclerViewPreloadFragment();
                 break;
@@ -137,6 +138,11 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
             case R.id.std_feed_pull_to_refresh:
                 fragmentToOpen = new PullToRefreshFragment();
                 break;
+
+            case R.id.std_feed_lazy_loading_rv:
+                fragmentToOpen = new FeedInsideRecyclerViewFragment();
+                break;
+
         }
 
         if (fragmentToOpen != null) {
