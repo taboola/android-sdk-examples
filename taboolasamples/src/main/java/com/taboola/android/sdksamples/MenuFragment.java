@@ -58,22 +58,8 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         ViewGroup viewGroup = view.findViewById(R.id.main_menu_lyt);
 
-        addHeader(getString(R.string.sdk_via_native), viewGroup);
-        addButton(getString(R.string.std_mid_article_with_feed_lnr), R.id.std_mid_article_with_feed_lnr, viewGroup);
-        addButton(getString(R.string.std_mid_article_with_feed_rv), R.id.std_mid_article_with_feed_rv, viewGroup);
-        addButton(getString(R.string.std_mid_article_with_feed_rv_manual), R.id.std_mid_article_with_feed_rv_manual, viewGroup);
-        addButton(getString(R.string.std_mid_article_preload), R.id.std_widget_preload, viewGroup);
-        addButton(getString(R.string.std_view_pager), R.id.std_view_pager, viewGroup);
-        addButton(getString(R.string.std_mid_article_with_feed_lv), R.id.std_mid_article_with_feed_lv, viewGroup);
-        addButton(getString(R.string.std_widget_dynamic_theme), R.id.std_widget_dynamic_theme, viewGroup);
-        addButton(getString(R.string.std_widget_xml), R.id.std_widget_xml, viewGroup);
-        addButton(getString(R.string.std_widget_oc_click), R.id.std_widget_oc_click, viewGroup);
-        addButton(getString(R.string.std_feed_pull_to_refresh), R.id.std_feed_pull_to_refresh, viewGroup);
-
-        addHeader(getString(R.string.sdk_via_js), viewGroup);
-        addButton(getString(R.string.js_mid_article_with_feed), R.id.js_mid_article_with_feed, viewGroup);
-        addButton(getString(R.string.js_split), R.id.js_split, viewGroup);
-        addButton(getString(R.string.js_view_pager), R.id.js_view_pager, viewGroup);
+        addButton(getString(R.string.std_video_widget), R.id.std_video_widget, viewGroup);
+        addButton(getString(R.string.std_video_feed), R.id.std_video_feed, viewGroup);
 
     }
 
@@ -136,6 +122,14 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
             case R.id.std_feed_pull_to_refresh:
                 fragmentToOpen = new PullToRefreshFragment();
+                break;
+
+            case R.id.std_video_widget:
+                fragmentToOpen = FeedWithMiddleArticleInsideScrollViewFragment.newInstance("widget");
+                break;
+
+            case R.id.std_video_feed:
+                fragmentToOpen = FeedWithMiddleArticleInsideScrollViewFragment.newInstance("feed");
                 break;
         }
 

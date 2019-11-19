@@ -18,6 +18,8 @@
     <item name="std_widget_oc_click" type="id"/>
     <item name="std_widget_preload" type="id"/>
     <item name="std_feed_pull_to_refresh" type="id"/>
+    <item name="std_video_feed" type="id"/>
+    <item name="std_video_widget" type="id"/>
 
 
 </resources>

@@ -80,7 +80,8 @@ These will help you remember what the consumer really wants to engage with and w
 
     <string name="toolbar_title">Taboola samples</string>
     <string name="sdk_via_native">SDK VIA NATIVE</string>
-    <string name="std_mid_article_with_feed_lnr">Widget + Feed (ScrollView)</string>
+    <string name="std_video_widget">Video Widget</string>
+    <string name="std_video_feed">Video Feed</string>
     <string name="std_mid_article_preload">Widget Preload</string>
     <string name="std_mid_article_with_feed_rv">Widget + Feed (RecyclerView)</string>
     <string name="std_mid_article_with_feed_rv_manual">Feed (RecyclerView) Manual Scroll Switch</string>

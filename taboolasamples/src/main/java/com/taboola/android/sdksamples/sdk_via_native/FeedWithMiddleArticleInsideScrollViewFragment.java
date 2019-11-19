@@ -4,57 +4,78 @@ package com.taboola.android.sdksamples.sdk_via_native;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.taboola.android.TaboolaWidget;
-import com.taboola.android.globalNotifications.GlobalNotificationReceiver;
 import com.taboola.android.sdksamples.R;
 import com.taboola.android.utils.SdkDetailsHelper;
 
 import java.util.HashMap;
 
 
-public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment implements GlobalNotificationReceiver.OnGlobalNotificationsListener {
+public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment {
 
     private static final String TAG = "DEBUG";
-    private static final String TABOOLA_VIEW_ID = "123456";
+    private static final String TABOOLA_VIEW_ID = String.valueOf(System.currentTimeMillis());
+    private String mTaboolaType;
 
-    GlobalNotificationReceiver mGlobalNotificationReceiver = new GlobalNotificationReceiver();
-    private TaboolaWidget mTaboolaWidgetBottom;
+
+    public static FeedWithMiddleArticleInsideScrollViewFragment newInstance(String taboolaType) {
+        FeedWithMiddleArticleInsideScrollViewFragment myFragment = new FeedWithMiddleArticleInsideScrollViewFragment();
+        Bundle args = new Bundle();
+        args.putString("taboolaType", taboolaType);
+        myFragment.setArguments(args);
+        return myFragment;
+}
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_standard, container, false);
-        buildMiddleArticleWidget(view.findViewById(R.id.taboola_widget_middle));
-        mTaboolaWidgetBottom = view.findViewById(R.id.taboola_widget_below_article);
+
+        mTaboolaType = getArguments().getString("taboolaType");
+        if (TextUtils.isEmpty(mTaboolaType)) {
+            Log.e(TAG, "Error!!!!!!!! TaboolaType is null!");
+            return view;
+        }
+
+        if (mTaboolaType.equals("widget")) {
+            buildBelowArticleWidgetWidget(view.findViewById(R.id.taboola_widget_below_article));
+        }
+        else {
+            buildBelowArticleWidgetFeed(view.findViewById(R.id.taboola_widget_below_article));
+        }
         return view;
     }
 
-    private void buildMiddleArticleWidget(TaboolaWidget taboolaWidget) {
+    private void buildBelowArticleWidgetWidget(TaboolaWidget taboolaWidget) {
         taboolaWidget
-                .setPublisher("sdk-tester")
+                .setPublisher("sdk-tester-rnd")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
-                .setPlacement("Mid Article")
-                .setMode("alternating-widget-without-video-1-on-1")
+                .setPlacement("Widget with video")
+                .setMode("alternating-widget-with-video")
                 .setTargetType("mix")
-                .setViewId(TABOOLA_VIEW_ID); // setViewId - used in order to prevent duplicate recommendations between widgets on the same page view
+                .setViewId(TABOOLA_VIEW_ID)
+                .setInterceptScroll(false);
+
+//        taboolaWidget.getLayoutParams().height = SdkDetailsHelper.getDisplayHeight(taboolaWidget.getContext()) * 2;
         HashMap<String, String> optionalPageCommands = new HashMap<>();
         optionalPageCommands.put("useOnlineTemplate", "true");
         taboolaWidget.setExtraProperties(optionalPageCommands);
         taboolaWidget.fetchContent();
     }
 
-    private void buildBelowArticleWidget(TaboolaWidget taboolaWidget) {
+    private void buildBelowArticleWidgetFeed(TaboolaWidget taboolaWidget) {
         taboolaWidget
-                .setPublisher("sdk-tester")
+                .setPublisher("sdk-tester-rnd")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
-                .setPlacement("Feed without video")
+                .setPlacement("Feed with video")
                 .setMode("thumbs-feed-01")
                 .setTargetType("mix")
                 .setViewId(TABOOLA_VIEW_ID)
@@ -65,47 +86,6 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment impl
         optionalPageCommands.put("useOnlineTemplate", "true");
         taboolaWidget.setExtraProperties(optionalPageCommands);
         taboolaWidget.fetchContent();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mGlobalNotificationReceiver.registerNotificationsListener(this);
-        mGlobalNotificationReceiver.registerReceiver(getActivity());
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mGlobalNotificationReceiver.unregisterNotificationsListener();
-        mGlobalNotificationReceiver.unregisterReceiver(getActivity());
-    }
-
-    @Override
-    public void taboolaDidReceiveAd(TaboolaWidget taboolaWidget) {
-        Log.d(TAG, "taboolaDidReceiveAd() called with: taboolaWidget = [" + taboolaWidget + "]");
-        if (taboolaWidget.getId() == R.id.taboola_widget_middle) {
-            buildBelowArticleWidget(mTaboolaWidgetBottom); //fetch content for the 2nd taboola asset only after completion of 1st item
-        }
-    }
-
-    @Override
-    public void taboolaViewResized(TaboolaWidget taboolaWidget, int height) {
-        Log.d(TAG, "taboolaViewResized() called with: taboolaWidget = [" + taboolaWidget + "], height = [" + height + "]");
-    }
-
-    @Override
-    public void taboolaItemDidClick(TaboolaWidget taboolaWidget) {
-        Log.d(TAG, "taboolaItemDidClick() called with: taboolaWidget = [" + taboolaWidget + "]");
-    }
-
-    @Override
-    public void taboolaDidFailAd(TaboolaWidget taboolaWidget, String reason) {
-        Log.d(TAG, "taboolaDidFailAd() called with: taboolaWidget = [" + taboolaWidget + "], reason = [" + reason + "]");
-        if (taboolaWidget.getId() == R.id.taboola_widget_middle) {
-            buildBelowArticleWidget(mTaboolaWidgetBottom); //fetch content for the 2nd taboola asset only after completion of 1st item
-        }
     }
 
 }
