@@ -79,7 +79,7 @@ public class FeedInsideRecyclerViewFragment extends BaseTaboolaFragment {
 
         private void buildBelowArticleWidget(TaboolaWidget taboolaWidget) {
             taboolaWidget
-                    .setPublisher("sdk-tester")
+                    .setPublisher("sdk-tester-demo")
                     .setPageType("article")
                     .setPageUrl("https://blog.taboola.com")
                     .setPlacement("Feed without video")

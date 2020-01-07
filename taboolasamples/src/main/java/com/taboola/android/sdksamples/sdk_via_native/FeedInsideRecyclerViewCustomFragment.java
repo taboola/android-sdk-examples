@@ -195,7 +195,7 @@ public class FeedInsideRecyclerViewCustomFragment extends Fragment implements Sc
                 ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
                 taboolaWidget.setLayoutParams(params);
                 taboolaWidget
-                        .setPublisher("sdk-tester")
+                        .setPublisher("sdk-tester-demo")
                         .setPageType("article")
                         .setPageUrl("https://blog.taboola.com")
                         .setPlacement("Feed without video")

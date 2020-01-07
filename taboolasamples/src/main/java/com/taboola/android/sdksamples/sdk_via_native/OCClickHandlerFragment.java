@@ -28,7 +28,7 @@ public class OCClickHandlerFragment extends Fragment implements TaboolaEventList
 
     private void buildMiddleArticleWidget(TaboolaWidget taboolaWidget) {
         taboolaWidget
-                .setPublisher("sdk-tester")
+                .setPublisher("sdk-tester-demo")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Feed without video")
