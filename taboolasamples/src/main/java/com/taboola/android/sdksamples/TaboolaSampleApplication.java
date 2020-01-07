@@ -29,7 +29,7 @@ public class TaboolaSampleApplication extends Application {
         TaboolaJs.getInstance().init(getApplicationContext());
 
         // Required when using TaboolaApi (Native Android) integration
-        TaboolaApi.getInstance().init(getApplicationContext(), "sdk-tester-demo", "d39df1418f5a4819c9eae2ca02595d57de98c246");
+        TaboolaApi.getInstance().init(getApplicationContext(), "sdk-tester-demo", "30dfcf6b094361ccc367bbbef5973bdaa24dbcd6");
     }
 
 }
