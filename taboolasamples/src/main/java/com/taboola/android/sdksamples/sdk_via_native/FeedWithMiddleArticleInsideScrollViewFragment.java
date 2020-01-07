@@ -36,11 +36,11 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment impl
 
     private void buildMiddleArticleWidget(TaboolaWidget taboolaWidget) {
         taboolaWidget
-                .setPublisher("sdk-tester")
+                .setPublisher("sdk-tester-demo")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Mid Article")
-                .setMode("alternating-widget-without-video-1-on-1")
+                .setMode("alternating-widget-without-video-1x1")
                 .setTargetType("mix")
                 .setViewId(TABOOLA_VIEW_ID); // setViewId - used in order to prevent duplicate recommendations between widgets on the same page view
         HashMap<String, String> optionalPageCommands = new HashMap<>();
@@ -51,7 +51,7 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment impl
 
     private void buildBelowArticleWidget(TaboolaWidget taboolaWidget) {
         taboolaWidget
-                .setPublisher("sdk-tester")
+                .setPublisher("sdk-tester-demo")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Feed without video")

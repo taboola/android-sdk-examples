@@ -48,7 +48,7 @@ public class FeedInsideScrollViewFragment extends BaseTaboolaFragment {
     private void buildBelowArticleWidget(Context context) {
 
         mTaboolaWidget
-                .setPublisher("sdk-tester")
+                .setPublisher("sdk-tester-demo")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Feed without video")

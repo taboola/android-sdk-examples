@@ -53,11 +53,11 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment im
 
     private static void buildMiddleArticleWidget(TaboolaWidget taboolaWidget) {
         taboolaWidget
-                .setPublisher("sdk-tester")
+                .setPublisher("sdk-tester-demo")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Mid Article")
-                .setMode("alternating-widget-without-video-1-on-1")
+                .setMode("alternating-widget-without-video-1x1")
                 .setTargetType("mix")
                 .setViewId(TABOOLA_VIEW_ID);
 
@@ -69,7 +69,7 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment im
 
     private static void buildBottomArticleWidget(TaboolaWidget taboolaWidget) {
         taboolaWidget
-                .setPublisher("sdk-tester")
+                .setPublisher("sdk-tester-demo")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Feed without video")

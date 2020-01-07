@@ -21,10 +21,10 @@
             android:id="@+id/taboola_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            taboola:tb_mode="alternating-widget-without-video"
+            taboola:tb_mode="alternating-widget-without-video-1x4"
             taboola:tb_page_type="article"
             taboola:tb_placement="Below Article"
-            taboola:tb_publisher="sdk-tester"
+            taboola:tb_publisher="sdk-tester-demo"
             taboola:tb_target_type="mix"
             taboola:tb_url="https://blog.taboola.com" />
 
