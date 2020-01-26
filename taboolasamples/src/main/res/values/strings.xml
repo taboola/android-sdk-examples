@@ -86,7 +86,6 @@ These will help you remember what the consumer really wants to engage with and w
     <string name="std_mid_article_with_feed_rv_manual">Feed (RecyclerView) Manual Scroll Switch</string>
     <string name="std_view_pager">ViewPager/Horizontal Scroll</string>
     <string name="std_mid_article_with_feed_lv">Widget + Feed (ListView)</string>
-    <string name="std_widget_dynamic_theme">Widget dynamic theme change (RecyclerView)</string>
     <string name="std_widget_xml">Widget Layout XML</string>
     <string name="sdk_via_js">SDK VIA JS</string>
     <string name="js_mid_article_with_feed">Widget + Feed</string>
@@ -100,4 +99,5 @@ These will help you remember what the consumer really wants to engage with and w
     </string>
     <string name="std_feed_pull_to_refresh">Pull to refresh</string>
     <string name="std_feed_lazy_loading_rv">Feed Lazy Loading (RecyclerView)</string>
+    <string name="std_mid_article_with_feed_dark_mode_rv">Feed with Dark Mode (RecyclerView)</string>
 </resources>
