@@ -16,6 +16,7 @@ import com.taboola.android.sdksamples.sdk_via_js.SplitFeedJsFragment;
 import com.taboola.android.sdksamples.sdk_via_js.ViewPagerViaJsFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedInsideRecyclerViewCustomFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedInsideRecyclerViewFragment;
+import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideListViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideRecyclerViewFragment;
 import com.taboola.android.sdksamples.sdk_via_native.FeedWithMiddleArticleInsideScrollViewFragment;
@@ -66,11 +67,11 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         addButton(getString(R.string.std_mid_article_preload), R.id.std_widget_preload, viewGroup);
         addButton(getString(R.string.std_view_pager), R.id.std_view_pager, viewGroup);
         addButton(getString(R.string.std_mid_article_with_feed_lv), R.id.std_mid_article_with_feed_lv, viewGroup);
-        addButton(getString(R.string.std_widget_dynamic_theme), R.id.std_widget_dynamic_theme, viewGroup);
         addButton(getString(R.string.std_widget_xml), R.id.std_widget_xml, viewGroup);
         addButton(getString(R.string.std_widget_oc_click), R.id.std_widget_oc_click, viewGroup);
         addButton(getString(R.string.std_feed_pull_to_refresh), R.id.std_feed_pull_to_refresh, viewGroup);
         addButton(getString(R.string.std_feed_lazy_loading_rv), R.id.std_feed_lazy_loading_rv, viewGroup);
+        addButton(getString(R.string.std_mid_article_with_feed_dark_mode_rv), R.id.std_mid_article_with_feed_dark_mode_rv, viewGroup);
 
         addHeader(getString(R.string.sdk_via_js), viewGroup);
         addButton(getString(R.string.js_mid_article_with_feed), R.id.js_mid_article_with_feed, viewGroup);
@@ -119,10 +120,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
                 fragmentToOpen = new FeedInsideRecyclerViewCustomFragment();
                 break;
 
-            case R.id.std_widget_dynamic_theme:
-                fragmentToOpen = new WidgetDynamicThemeChange();
-                break;
-
             case R.id.std_widget_xml:
                 fragmentToOpen = new SimpleWidgetFragment();
                 break;
@@ -141,6 +138,10 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
             case R.id.std_feed_lazy_loading_rv:
                 fragmentToOpen = new FeedInsideRecyclerViewFragment();
+                break;
+
+            case R.id.std_mid_article_with_feed_dark_mode_rv:
+                fragmentToOpen = new FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment();
                 break;
 
         }
