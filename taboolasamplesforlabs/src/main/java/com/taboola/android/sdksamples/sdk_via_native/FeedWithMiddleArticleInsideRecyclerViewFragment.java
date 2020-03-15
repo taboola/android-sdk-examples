@@ -53,11 +53,11 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment im
 
     private static void buildMiddleArticleWidget(TaboolaWidget taboolaWidget) {
         taboolaWidget
-                .setPublisher("sdk-tester-demo")
+                .setPublisher("meteoconsultmarine-androd")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Mid Article")
-                .setMode("alternating-widget-without-video-1x1")
+                .setMode("thumbnails-t")
                 .setTargetType("mix")
                 .setViewId(TABOOLA_VIEW_ID);
 

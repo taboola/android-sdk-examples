@@ -2,9 +2,11 @@ package com.taboola.android.sdksamples;
 
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,6 +80,9 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         addButton(getString(R.string.js_split), R.id.js_split, viewGroup);
         addButton(getString(R.string.js_view_pager), R.id.js_view_pager, viewGroup);
 
+        addHeader(getString(R.string.tbl_custom_tab), viewGroup);
+        addButton(getString(R.string.tbl_custom_tab), R.id.tbl_custom_tab, viewGroup);
+
     }
 
 
@@ -142,6 +147,13 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
 
             case R.id.std_mid_article_with_feed_dark_mode_rv:
                 fragmentToOpen = new FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment();
+                break;
+
+            case R.id.tbl_custom_tab:
+                String url = "https://www.thestartmagazine.com/feed/summary?&publisherId=Ops_Testing&key=0QzhwJKBfOxouyYgW3woxhwv04inkqWH&countryCode=US&category=Finance&vendor=Reuters,Bloomberg&language=en";
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                CustomTabsIntent customTabsIntent = builder.build();
+                customTabsIntent.launchUrl(getContext(), Uri.parse(url));
                 break;
 
         }
