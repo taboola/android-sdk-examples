@@ -79,7 +79,18 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             case TYPE_TABOOLA: {
                 TBRecommendationItem item = (TBRecommendationItem) mData.get(position);
                 LinearLayout adContainer = ((TaboolaItemViewHolder) holder).mAdContainer;
+
+                /* Dark Mode support - change the background color of the adContainer to BLACK (This will set the widget's background to BLACK. If needed, you can apply this on the entire page):
+
+                adContainer.setBackgroundColor(Color.BLACK); */
+
                 TBImageView thumbnailView = item.getThumbnailView(adContainer.getContext());
+
+                /* Dark Mode support - change text color to WHITE:
+
+                TBTextView title = item.getTitleView(adContainer.getContext());
+                title.setTextColor(Color.WHITE); */
+
                 adContainer.addView(thumbnailView);
                 adContainer.addView(item.getTitleView(adContainer.getContext()));
                 adContainer.addView(item.getBrandingView(adContainer.getContext()));

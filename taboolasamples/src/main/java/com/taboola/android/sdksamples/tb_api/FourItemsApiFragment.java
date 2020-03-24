@@ -54,6 +54,10 @@ public class FourItemsApiFragment extends Fragment {
 
         adContainer = view.findViewById(R.id.ad_container);
 
+        /* Dark Mode support - change the background color of the adContainer to BLACK:
+
+        adContainer.setBackgroundColor(Color.BLACK); */
+
         attributionView = view.findViewById(R.id.attribution_view);
         attributionView.setOnClickListener(v -> TaboolaApi.getInstance().handleAttributionClick(getContext()));
 
@@ -69,6 +73,17 @@ public class FourItemsApiFragment extends Fragment {
         // prepare a placement request
         TBPlacementRequest placementRequest = new TBPlacementRequest(placementName, recCount)
                 .setThumbnailSize(mScreenSize.x, (mScreenSize.y / 3)); // ThumbnailSize is optional
+
+                /*
+           If we want to prevent 'available' event from being sent upon request
+           (using setAvailable(false) will send the event upon render):
+
+           TBPlacementRequest placementRequest = new TBPlacementRequest(placementName, 4)
+                .setThumbnailSize(screenSize.x / 2, (screenSize.y / 6))
+                .setAvailable(false);
+
+           *** PLEASE DO NOT CHANGE THE VALUE OF  "setAvailable" TO FALSE WITHOUT GETTING YOUR ACCOUNT MANAGER'S APPROVAL ***
+         */
 
         // prepare the recommendation request
         TBRecommendationsRequest recommendationsRequest = new TBRecommendationsRequest(pageUrl, sourceType);
@@ -102,6 +117,11 @@ public class FourItemsApiFragment extends Fragment {
         if (placement != null) {
             for (TBRecommendationItem item : placement.getItems()) {
                 attributionView.setVisibility(View.VISIBLE);
+
+                /* Dark Mode support - change text color to WHITE:
+
+                TBTextView title = item.getTitleView(getContext());
+                title.setTextColor(Color.WHITE); */
 
                 adContainer.addView(item.getThumbnailView(getContext()));
                 adContainer.addView(item.getTitleView(getContext()));
