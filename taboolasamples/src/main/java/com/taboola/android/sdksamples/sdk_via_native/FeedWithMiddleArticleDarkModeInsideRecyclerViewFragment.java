@@ -25,13 +25,20 @@ import java.util.List;
 
 public class FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment extends Fragment implements GlobalNotificationReceiver.OnGlobalNotificationsListener {
 
-    private static final String TAG = "FeedWithMiddleArticleDarkMode";
+    private static final String TAG = "Feed+MidArticleDarkMode";
     private static final String TABOOLA_VIEW_ID = "123456";
 
     private static TaboolaWidget mMiddleTaboolaWidget;
     private static TaboolaWidget mBottomTaboolaWidget;
 
     private GlobalNotificationReceiver mGlobalNotificationReceiver = new GlobalNotificationReceiver();
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mGlobalNotificationReceiver.registerNotificationsListener(this);
+        mGlobalNotificationReceiver.registerReceiver(getActivity());
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -61,10 +68,23 @@ public class FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment extends Fra
                 .setTargetType("mix")
                 .setViewId(TABOOLA_VIEW_ID);
 
-        HashMap<String, String> optionalPageCommands = new HashMap<>();
-        optionalPageCommands.put("useOnlineTemplate", "true");
-        optionalPageCommands.put("darkMode", "true"); // Adding Dark Mode Support
-        taboolaWidget.setExtraProperties(optionalPageCommands);
+        HashMap<String, String> extraProperties = new HashMap<>();
+        extraProperties.put("useOnlineTemplate", "true");
+        extraProperties.put("darkMode", "true"); // Adding Dark Mode Support
+
+        /*
+            Adding this flag will require handling of collapsing Taboola on taboolaDidFailAd()
+            in case Taboola fails to render (set to "true" by default):
+            extraProperties.put("autoCollapseOnError", "false");
+         */
+
+        /*
+            "detailedErrorCodes" set to "true" will stop the use of unorganized and unmaintained error reasons strings
+            and will instead use detailed error codes (see taboolaDidFailAd() for more details)
+         */
+        extraProperties.put("detailedErrorCodes", "true");
+
+        taboolaWidget.setExtraProperties(extraProperties);
         taboolaWidget.fetchContent();
     }
 
@@ -80,10 +100,21 @@ public class FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment extends Fra
 
         taboolaWidget.setInterceptScroll(true);
 
-        HashMap<String, String> optionalPageCommands = new HashMap<>();
-        optionalPageCommands.put("useOnlineTemplate", "true");
-        optionalPageCommands.put("darkMode", "true"); // Adding Dark Mode Support
-        taboolaWidget.setExtraProperties(optionalPageCommands);
+        HashMap<String, String> extraProperties = new HashMap<>();
+        extraProperties.put("useOnlineTemplate", "true");
+        extraProperties.put("darkMode", "true"); // Adding Dark Mode Support
+        /*
+            Adding this flag will require handling of collapsing Taboola on taboolaDidFailAd()
+            in case Taboola fails to render (set to "true" by default):
+            extraProperties.put("autoCollapseOnError", "false");
+         */
+
+        /*
+            "detailedErrorCodes" set to "true" will stop the use of unorganized and unmaintained error reasons strings
+            and will instead use detailed error codes (see taboolaDidFailAd() for more details)
+         */
+        extraProperties.put("detailedErrorCodes", "true");
+        taboolaWidget.setExtraProperties(extraProperties);
         taboolaWidget.fetchContent();
     }
 
@@ -97,16 +128,8 @@ public class FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment extends Fra
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mGlobalNotificationReceiver.registerNotificationsListener(this);
-        mGlobalNotificationReceiver.registerReceiver(getActivity());
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
+    public void onDestroy() {
+        super.onDestroy();
         mGlobalNotificationReceiver.unregisterNotificationsListener();
         mGlobalNotificationReceiver.unregisterReceiver(getActivity());
     }
@@ -205,7 +228,25 @@ public class FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment extends Fra
     }
 
     @Override
-    public void taboolaDidFailAd(TaboolaWidget taboolaWidget, String s) {
+    public void taboolaDidFailAd(TaboolaWidget taboolaWidget, String reason) {
+        // If "detailedErrorCodes is set to "true":
+        switch (reason) {
+            case "NO_ITEMS":
+                Log.d(TAG, "Taboola server returned a valid response, but without any items");
+                break;
+            case "TIMEOUT":
+                Log.d(TAG, "no response from Taboola server after 10 seconds");
+                break;
+            case "WRONG_PARAMS":
+                Log.d(TAG, "wrong Taboola mode");
+                break;
+            case "RESPONSE_ERROR":
+                Log.d(TAG, "Taboola server is not reachable, or it returned a bad response");
+                break;
+            default:
+                Log.d(TAG, "UNKNOWN_ERROR");
+        }
+
         if (taboolaWidget.getId() == R.id.taboola_widget_middle) {
             buildBottomArticleWidget(mBottomTaboolaWidget); //fetch content for the 2nd taboola asset only after completion of 1st item
         }

@@ -18,9 +18,9 @@ public class SimpleWidgetFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_simple_widget, container, false);
         TaboolaWidget taboolaWidget = view.findViewById(R.id.taboola_view);
-        HashMap<String, String> optionalPageCommands = new HashMap<>();
-        optionalPageCommands.put("useOnlineTemplate", "true");
-        taboolaWidget.setExtraProperties(optionalPageCommands);
+        HashMap<String, String> extraProperties = new HashMap<>();
+        extraProperties.put("useOnlineTemplate", "true");
+        taboolaWidget.setExtraProperties(extraProperties);
         taboolaWidget.fetchContent();
         return view;
     }

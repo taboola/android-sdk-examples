@@ -51,9 +51,9 @@ public class RecyclerViewPreloadFragment extends Fragment {
                 .setTargetType("mix");
 
 
-        HashMap<String, String> optionalPageCommands = new HashMap<>();
-        optionalPageCommands.put("useOnlineTemplate", "true");
-        taboolaWidget.setExtraProperties(optionalPageCommands);
+        HashMap<String, String> extraProperties = new HashMap<>();
+        extraProperties.put("useOnlineTemplate", "true");
+        taboolaWidget.setExtraProperties(extraProperties);
         taboolaWidget.fetchContent();
     }
 
