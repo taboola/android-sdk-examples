@@ -37,9 +37,9 @@ public class OCClickHandlerFragment extends Fragment implements TaboolaEventList
                 .setTaboolaEventListener(this)
                 .setInterceptScroll(true);
 
-        HashMap<String, String> optionalPageCommands = new HashMap<>();
-        optionalPageCommands.put("useOnlineTemplate", "true");
-        taboolaWidget.setExtraProperties(optionalPageCommands);
+        HashMap<String, String> extraProperties = new HashMap<>();
+        extraProperties.put("useOnlineTemplate", "true");
+        taboolaWidget.setExtraProperties(extraProperties);
 
         final int height = SdkDetailsHelper.getDisplayHeight(taboolaWidget.getContext());
         ViewGroup.LayoutParams params = taboolaWidget.getLayoutParams();

@@ -84,10 +84,10 @@ public class WidgetDynamicThemeChange extends Fragment {
 
         private static TaboolaWidget createTaboolaWidget(Context context) {
             TaboolaWidget taboolaWidget = new TaboolaWidget(context);
-            HashMap<String, String> optionalPageCommands = new HashMap<>();
-            optionalPageCommands.put("keepDependencies", "true");
-            optionalPageCommands.put("useOnlineTemplate", "true");
-            taboolaWidget.setExtraProperties(optionalPageCommands);
+            HashMap<String, String> extraProperties = new HashMap<>();
+            extraProperties.put("keepDependencies", "true");
+            extraProperties.put("useOnlineTemplate", "true");
+            taboolaWidget.setExtraProperties(extraProperties);
 
             taboolaWidget.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             return taboolaWidget;
