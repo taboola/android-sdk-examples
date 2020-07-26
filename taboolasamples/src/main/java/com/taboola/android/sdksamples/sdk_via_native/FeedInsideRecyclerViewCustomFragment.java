@@ -142,9 +142,9 @@ public class FeedInsideRecyclerViewCustomFragment extends Fragment implements Sc
                     mGlobalTaboolaView.setAutoResizeHeight(false);
                     mGlobalTaboolaView.setInterceptScroll(mEnableWidgetScroll);
                     mGlobalTaboolaView.setScrollEnabled(mEnableWidgetScroll);
-                    HashMap<String, String> optionalPageCommands = new HashMap<>();
-                    optionalPageCommands.put("useOnlineTemplate", "true");
-                    mGlobalTaboolaView.setExtraProperties(optionalPageCommands);
+                    HashMap<String, String> extraProperties = new HashMap<>();
+                    extraProperties.put("useOnlineTemplate", "true");
+                    mGlobalTaboolaView.setExtraProperties(extraProperties);
                     return new ViewHolderTaboola(mGlobalTaboolaView);
 
                 default:
@@ -195,7 +195,7 @@ public class FeedInsideRecyclerViewCustomFragment extends Fragment implements Sc
                 ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
                 taboolaWidget.setLayoutParams(params);
                 taboolaWidget
-                        .setPublisher("sdk-tester")
+                        .setPublisher("sdk-tester-demo")
                         .setPageType("article")
                         .setPageUrl("https://blog.taboola.com")
                         .setPlacement("Feed without video")

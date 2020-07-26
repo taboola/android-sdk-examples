@@ -28,7 +28,7 @@ public class OCClickHandlerFragment extends Fragment implements TaboolaEventList
 
     private void buildMiddleArticleWidget(TaboolaWidget taboolaWidget) {
         taboolaWidget
-                .setPublisher("sdk-tester")
+                .setPublisher("sdk-tester-demo")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Feed without video")
@@ -37,9 +37,9 @@ public class OCClickHandlerFragment extends Fragment implements TaboolaEventList
                 .setTaboolaEventListener(this)
                 .setInterceptScroll(true);
 
-        HashMap<String, String> optionalPageCommands = new HashMap<>();
-        optionalPageCommands.put("useOnlineTemplate", "true");
-        taboolaWidget.setExtraProperties(optionalPageCommands);
+        HashMap<String, String> extraProperties = new HashMap<>();
+        extraProperties.put("useOnlineTemplate", "true");
+        taboolaWidget.setExtraProperties(extraProperties);
 
         final int height = SdkDetailsHelper.getDisplayHeight(taboolaWidget.getContext());
         ViewGroup.LayoutParams params = taboolaWidget.getLayoutParams();

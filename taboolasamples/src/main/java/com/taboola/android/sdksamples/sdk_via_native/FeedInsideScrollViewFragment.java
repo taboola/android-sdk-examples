@@ -48,7 +48,7 @@ public class FeedInsideScrollViewFragment extends BaseTaboolaFragment {
     private void buildBelowArticleWidget(Context context) {
 
         mTaboolaWidget
-                .setPublisher("sdk-tester")
+                .setPublisher("sdk-tester-demo")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Feed without video")
@@ -62,10 +62,10 @@ public class FeedInsideScrollViewFragment extends BaseTaboolaFragment {
         }
 
         //used for enable horizontal scroll
-        HashMap<String, String> optionalPageCommands = new HashMap<>();
-        optionalPageCommands.put("enableHorizontalScroll", "true");
-        optionalPageCommands.put("useOnlineTemplate", "true");
-        mTaboolaWidget.setExtraProperties(optionalPageCommands);
+        HashMap<String, String> extraProperties = new HashMap<>();
+        extraProperties.put("enableHorizontalScroll", "true");
+        extraProperties.put("useOnlineTemplate", "true");
+        mTaboolaWidget.setExtraProperties(extraProperties);
 
         mTaboolaWidget.getLayoutParams().height = SdkDetailsHelper.getDisplayHeight(context);
 

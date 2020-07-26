@@ -23,9 +23,9 @@ import com.taboola.android.utils.SdkDetailsHelper;
 import java.util.HashMap;
 import java.util.List;
 
-public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment implements GlobalNotificationReceiver.OnGlobalNotificationsListener {
+public class FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment extends Fragment implements GlobalNotificationReceiver.OnGlobalNotificationsListener {
 
-    private static final String TAG = "FeedWithMiddleArticle";
+    private static final String TAG = "Feed+MidArticleDarkMode";
     private static final String TABOOLA_VIEW_ID = "123456";
 
     private static TaboolaWidget mMiddleTaboolaWidget;
@@ -64,12 +64,13 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment im
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Mid Article")
-                .setMode("alternating-widget-without-video-1x1")
+                .setMode("alternating-widget-1x2")
                 .setTargetType("mix")
                 .setViewId(TABOOLA_VIEW_ID);
 
         HashMap<String, String> extraProperties = new HashMap<>();
         extraProperties.put("useOnlineTemplate", "true");
+        extraProperties.put("darkMode", "true"); // Adding Dark Mode Support
 
         /*
             Adding this flag will require handling of collapsing Taboola on taboolaDidFailAd()
@@ -101,6 +102,7 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment im
 
         HashMap<String, String> extraProperties = new HashMap<>();
         extraProperties.put("useOnlineTemplate", "true");
+        extraProperties.put("darkMode", "true"); // Adding Dark Mode Support
         /*
             Adding this flag will require handling of collapsing Taboola on taboolaDidFailAd()
             in case Taboola fails to render (set to "true" by default):
@@ -112,7 +114,6 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment im
             and will instead use detailed error codes (see taboolaDidFailAd() for more details)
          */
         extraProperties.put("detailedErrorCodes", "true");
-
         taboolaWidget.setExtraProperties(extraProperties);
         taboolaWidget.fetchContent();
     }

@@ -87,6 +87,17 @@ public class FeedApiFragment extends Fragment {
         TBPlacementRequest placementRequest = new TBPlacementRequest(placementName, 4)
                 .setThumbnailSize(screenSize.x / 2, (screenSize.y / 6)); // ThumbnailSize is optional
 
+        /*
+           If we want to prevent 'available' event from being sent upon request
+           (using setAvailable(false) will send the event upon render):
+
+           TBPlacementRequest placementRequest = new TBPlacementRequest(placementName, 4)
+                .setThumbnailSize(screenSize.x / 2, (screenSize.y / 6))
+                .setAvailable(false);
+
+           *** PLEASE DO NOT CHANGE THE VALUE OF  "setAvailable" TO FALSE WITHOUT GETTING YOUR ACCOUNT MANAGER'S APPROVAL ***
+         */
+
         TBRecommendationsRequest request = new TBRecommendationsRequest("https://example.com", "text");
         request.addPlacementRequest(placementRequest);
 

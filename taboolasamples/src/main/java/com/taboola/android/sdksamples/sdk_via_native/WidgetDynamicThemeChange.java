@@ -84,10 +84,10 @@ public class WidgetDynamicThemeChange extends Fragment {
 
         private static TaboolaWidget createTaboolaWidget(Context context) {
             TaboolaWidget taboolaWidget = new TaboolaWidget(context);
-            HashMap<String, String> optionalPageCommands = new HashMap<>();
-            optionalPageCommands.put("keepDependencies", "true");
-            optionalPageCommands.put("useOnlineTemplate", "true");
-            taboolaWidget.setExtraProperties(optionalPageCommands);
+            HashMap<String, String> extraProperties = new HashMap<>();
+            extraProperties.put("keepDependencies", "true");
+            extraProperties.put("useOnlineTemplate", "true");
+            taboolaWidget.setExtraProperties(extraProperties);
 
             taboolaWidget.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             return taboolaWidget;
@@ -105,7 +105,7 @@ public class WidgetDynamicThemeChange extends Fragment {
 
         private void loadWidget(TaboolaWidget taboolaWidget) {
             taboolaWidget
-                    .setPublisher("sdk-tester")
+                    .setPublisher("sdk-tester-demo")
                     .setPageType("article")
                     .setPageUrl("https://blog.taboola.com")
                     .setTargetType("mix");
@@ -114,12 +114,12 @@ public class WidgetDynamicThemeChange extends Fragment {
                 case BLACK:
                     taboolaWidget
                             .setPlacement("Dark Mode Widget")
-                            .setMode("alternating-1x2-widget-dark");
+                            .setMode("alternating-widget-1x2-dark");
                     break;
                 case WHITE:
                     taboolaWidget
                             .setPlacement("Mid Article")
-                            .setMode("alternating-1x2-widget");
+                            .setMode("alternating-widget-1x2");
                     break;
             }
 

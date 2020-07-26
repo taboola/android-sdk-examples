@@ -26,7 +26,11 @@ dependencies {
     //to Taboola SDK documentation - https://developers.taboola.com/taboolasdk
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+<<<<<<< HEAD
     implementation 'com.taboola:android-sdk:2.7.0'
+=======
+    implementation 'com.taboola:android-sdk:2.5.0'
+>>>>>>> 4f4667a1b4615535d77304707f7715920a581546
 
     // include to have clicks opened in chrome tabs rather than in a default browser (mandatory)
     implementation 'com.android.support:customtabs:28.0.0'
@@ -37,8 +41,8 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
 
-    // SDK dependencies for sdk api not needed if you use sdk via native or sdk via js.
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    // SDK dependencies for sdk api - not needed if you use sdk via native or sdk via js
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
 }

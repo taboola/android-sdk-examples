@@ -35,6 +35,13 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment implem
     private static TaboolaWidget mTaboolaWidgetBottom;
     private static TaboolaWidget mTaboolaWidgetMiddle;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mGlobalNotificationReceiver.registerNotificationsListener(this);
+        mGlobalNotificationReceiver.registerReceiver(getActivity());
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,20 +71,33 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment implem
         TaboolaWidget taboolaWidget = new TaboolaWidget(context);
         int height = infiniteWidget ? SdkDetailsHelper.getDisplayHeight(context) : ViewGroup.LayoutParams.WRAP_CONTENT;
         taboolaWidget.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
-        HashMap<String, String> optionalPageCommands = new HashMap<>();
-        optionalPageCommands.put("useOnlineTemplate", "true");
-        taboolaWidget.setExtraProperties(optionalPageCommands);
+        HashMap<String, String> extraProperties = new HashMap<>();
+        extraProperties.put("useOnlineTemplate", "true");
+
+        /*
+            Adding this flag will require handling of collapsing Taboola on taboolaDidFailAd()
+            in case Taboola fails to render (set to "true" by default):
+            extraProperties.put("autoCollapseOnError", "false");
+         */
+
+        /*
+            "detailedErrorCodes" set to "true" will stop the use of unorganized and unmaintained error reasons strings
+            and will instead use detailed error codes (see taboolaDidFailAd() for more details)
+         */
+        extraProperties.put("detailedErrorCodes", "true");
+
+        taboolaWidget.setExtraProperties(extraProperties);
         return taboolaWidget;
     }
 
 
     private static void buildMiddleArticleWidget(TaboolaWidget taboolaWidget) {
         taboolaWidget
-                .setPublisher("sdk-tester")
+                .setPublisher("sdk-tester-demo")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Mid Article")
-                .setMode("alternating-widget-without-video-1-on-1")
+                .setMode("alternating-widget-without-video-1x1")
                 .setTargetType("mix")
                 .setViewId(TABOOLA_VIEW_ID) // setViewId - used in order to prevent duplicate recommendations between widgets on the same page view
                 .fetchContent();
@@ -85,10 +105,10 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment implem
 
     private static void buildBelowArticleWidget(TaboolaWidget taboolaWidget) {
         taboolaWidget
-                .setPublisher("sdk-tester")
+                .setPublisher("sdk-tester-demo")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
-                .setPlacement("Feed with video")
+                .setPlacement("Feed without video")
                 .setMode("thumbs-feed-01")
                 .setTargetType("mix")
                 .setViewId(TABOOLA_VIEW_ID)
@@ -97,20 +117,11 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment implem
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mGlobalNotificationReceiver.registerNotificationsListener(this);
-        mGlobalNotificationReceiver.registerReceiver(getActivity());
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
+    public void onDestroy() {
+        super.onDestroy();
         mGlobalNotificationReceiver.unregisterNotificationsListener();
         mGlobalNotificationReceiver.unregisterReceiver(getActivity());
     }
-
 
     @Override
     public void taboolaDidReceiveAd(TaboolaWidget taboolaWidget) {
@@ -120,7 +131,25 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment implem
     }
 
     @Override
-    public void taboolaDidFailAd(TaboolaWidget taboolaWidget, String s) {
+    public void taboolaDidFailAd(TaboolaWidget taboolaWidget, String reason) {
+        // If "detailedErrorCodes is set to "true":
+        switch (reason) {
+            case "NO_ITEMS":
+                Log.d(TAG, "Taboola server returned a valid response, but without any items");
+                break;
+            case "TIMEOUT":
+                Log.d(TAG, "no response from Taboola server after 10 seconds");
+                break;
+            case "WRONG_PARAMS":
+                Log.d(TAG, "wrong Taboola mode");
+                break;
+            case "RESPONSE_ERROR":
+                Log.d(TAG, "Taboola server is not reachable, or it returned a bad response");
+                break;
+            default:
+                Log.d(TAG, "UNKNOWN_ERROR");
+        }
+
         if (taboolaWidget == mTaboolaWidgetMiddle) { //When Middle Article widget returns - we fetch the below article widget
             buildBelowArticleWidget(mTaboolaWidgetBottom);
         }

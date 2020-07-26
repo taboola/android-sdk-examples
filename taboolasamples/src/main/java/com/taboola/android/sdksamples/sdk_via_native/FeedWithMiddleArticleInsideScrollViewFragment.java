@@ -3,6 +3,7 @@ package com.taboola.android.sdksamples.sdk_via_native;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +27,13 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment impl
     private TaboolaWidget mTaboolaWidgetBottom;
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mGlobalNotificationReceiver.registerNotificationsListener(this);
+        mGlobalNotificationReceiver.registerReceiver(getActivity());
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_standard, container, false);
@@ -36,22 +44,35 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment impl
 
     private void buildMiddleArticleWidget(TaboolaWidget taboolaWidget) {
         taboolaWidget
-                .setPublisher("sdk-tester")
+                .setPublisher("sdk-tester-demo")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Mid Article")
-                .setMode("alternating-widget-without-video-1-on-1")
+                .setMode("alternating-widget-without-video-1x1")
                 .setTargetType("mix")
                 .setViewId(TABOOLA_VIEW_ID); // setViewId - used in order to prevent duplicate recommendations between widgets on the same page view
-        HashMap<String, String> optionalPageCommands = new HashMap<>();
-        optionalPageCommands.put("useOnlineTemplate", "true");
-        taboolaWidget.setExtraProperties(optionalPageCommands);
+        HashMap<String, String> extraProperties = new HashMap<>();
+        extraProperties.put("useOnlineTemplate", "true");
+
+        /*
+            Adding this flag will require handling of collapsing Taboola on taboolaDidFailAd()
+            in case Taboola fails to render (set to "true" by default):
+            extraProperties.put("autoCollapseOnError", "false");
+         */
+
+        /*
+            "detailedErrorCodes" set to "true" will stop the use of unorganized and unmaintained error reasons strings
+            and will instead use detailed error codes (see taboolaDidFailAd() for more details)
+         */
+        extraProperties.put("detailedErrorCodes", "true");
+
+        taboolaWidget.setExtraProperties(extraProperties);
         taboolaWidget.fetchContent();
     }
 
     private void buildBelowArticleWidget(TaboolaWidget taboolaWidget) {
         taboolaWidget
-                .setPublisher("sdk-tester")
+                .setPublisher("sdk-tester-demo")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Feed without video")
@@ -61,23 +82,28 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment impl
                 .setInterceptScroll(true);
 
         taboolaWidget.getLayoutParams().height = SdkDetailsHelper.getDisplayHeight(taboolaWidget.getContext()) * 2;
-        HashMap<String, String> optionalPageCommands = new HashMap<>();
-        optionalPageCommands.put("useOnlineTemplate", "true");
-        taboolaWidget.setExtraProperties(optionalPageCommands);
+        HashMap<String, String> extraProperties = new HashMap<>();
+        extraProperties.put("useOnlineTemplate", "true");
+
+        /*
+            Adding this flag will require handling of collapsing Taboola on taboolaDidFailAd()
+            in case Taboola fails to render (set to "true" by default):
+            extraProperties.put("autoCollapseOnError", "false");
+         */
+
+        /*
+            "detailedErrorCodes" set to "true" will stop the use of unorganized and unmaintained error reasons strings
+            and will instead use detailed error codes (see taboolaDidFailAd() for more details)
+         */
+        extraProperties.put("detailedErrorCodes", "true");
+
+        taboolaWidget.setExtraProperties(extraProperties);
         taboolaWidget.fetchContent();
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mGlobalNotificationReceiver.registerNotificationsListener(this);
-        mGlobalNotificationReceiver.registerReceiver(getActivity());
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
+    public void onDestroy() {
+        super.onDestroy();
         mGlobalNotificationReceiver.unregisterNotificationsListener();
         mGlobalNotificationReceiver.unregisterReceiver(getActivity());
     }
@@ -103,6 +129,25 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment impl
     @Override
     public void taboolaDidFailAd(TaboolaWidget taboolaWidget, String reason) {
         Log.d(TAG, "taboolaDidFailAd() called with: taboolaWidget = [" + taboolaWidget + "], reason = [" + reason + "]");
+
+        // If "detailedErrorCodes is set to "true":
+        switch (reason) {
+            case "NO_ITEMS":
+                Log.d(TAG, "Taboola server returned a valid response, but without any items");
+                break;
+            case "TIMEOUT":
+                Log.d(TAG, "no response from Taboola server after 10 seconds");
+                break;
+            case "WRONG_PARAMS":
+                Log.d(TAG, "wrong Taboola mode");
+                break;
+            case "RESPONSE_ERROR":
+                Log.d(TAG, "Taboola server is not reachable, or it returned a bad response");
+                break;
+            default:
+                Log.d(TAG, "UNKNOWN_ERROR");
+        }
+
         if (taboolaWidget.getId() == R.id.taboola_widget_middle) {
             buildBelowArticleWidget(mTaboolaWidgetBottom); //fetch content for the 2nd taboola asset only after completion of 1st item
         }

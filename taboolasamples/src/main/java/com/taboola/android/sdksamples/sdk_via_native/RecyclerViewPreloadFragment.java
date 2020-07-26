@@ -43,17 +43,17 @@ public class RecyclerViewPreloadFragment extends Fragment {
 
     private static void buildMiddleArticleWidget(TaboolaWidget taboolaWidget) {
         taboolaWidget
-                .setPublisher("sdk-tester")
+                .setPublisher("sdk-tester-demo")
                 .setPageType("article")
                 .setPageUrl("https://blog.taboola.com")
                 .setPlacement("Below Article")
-                .setMode("alternating-widget-with-video")
+                .setMode("alternating-widget-without-video-1x4")
                 .setTargetType("mix");
 
 
-        HashMap<String, String> optionalPageCommands = new HashMap<>();
-        optionalPageCommands.put("useOnlineTemplate", "true");
-        taboolaWidget.setExtraProperties(optionalPageCommands);
+        HashMap<String, String> extraProperties = new HashMap<>();
+        extraProperties.put("useOnlineTemplate", "true");
+        taboolaWidget.setExtraProperties(extraProperties);
         taboolaWidget.fetchContent();
     }
 
