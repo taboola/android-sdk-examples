@@ -1,0 +1,111 @@
+<html>
+
+<head>
+    <meta name='viewport' content='width=device-width, user-scalable=no'/>
+
+    <script type="text/javascript">
+        !function (e, f, u, i) {
+            if (!document.getElementById(i)) {
+                e.async = 1;
+                e.src = u;
+                e.id = i;
+                f.parentNode.insertBefore(e, f);
+            }
+        } (document.createElement('script'),
+            document.getElementsByTagName('script')[0],
+            'https://cdn.taboola.com/libtrc/sdk-tester-demo/mobile-loader.js',
+            'tb-mobile-loader-script');
+
+    </script>
+
+</head>
+
+<body>
+
+
+<p>Everything you need to get your brand seen, bought and loved for its content.</p>
+
+<p>The internet is overflowing with content. It’s everywhere—email, social media, message boards,
+    phone apps, on tablets and computers.
+</p>
+
+<p>The content marketer’s job is harder than ever. To reach your target customers, you must create
+    content strong enough to cut through the noise.
+</p>
+<p>That’s a tall order. To do it successfully requires mastering a specific set of skills—the least
+    of which is SEO.
+</p>
+<p>With this content marketing primer, you’ll understand what content marketing is, why it works
+    (and why it doesn’t always work), what businesses get wrong and how to do it right. There’s a
+    lot of information here, but if you take home only one piece of advice, it’s this: create the
+    best content you can produce.
+</p>
+
+<p>Anything less will get buried deep in search engine results pages (SERP) and no one will find it.
+</p>
+
+<div id='taboola_mid_article'>
+</div>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla bibendum mauris eget odio
+    fermentum, non elementum lectus dapibus. Mauris egestas euismod orci molestie aliquet. Curabitur
+    posuere, ante rhoncus sodales suscipit, sem tellus viverra erat, et venenatis augue quam non
+    diam. In aliquam arcu eget nisl imperdiet finibus. Nunc pharetra sapien felis, vitae aliquam
+    lorem bibendum in. Donec lacinia blandit tellus quis rutrum. Vivamus mattis mollis porta. Ut
+    eleifend nisi quis magna faucibus ultricies.
+</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla bibendum mauris eget odio
+    fermentum, non elementum lectus dapibus. Mauris egestas euismod orci molestie aliquet. Curabitur
+    posuere, ante rhoncus sodales suscipit, sem tellus viverra erat, et venenatis augue quam non
+    diam. In aliquam arcu eget nisl imperdiet finibus. Nunc pharetra sapien felis, vitae aliquam
+    lorem bibendum in. Donec lacinia blandit tellus quis rutrum. Vivamus mattis mollis porta. Ut
+    eleifend nisi quis magna faucibus ultricies.
+</p>
+
+<div id='taboola_below_article'>
+</div>
+
+<script type='text/javascript'>
+    window._taboola = window._taboola || [];
+
+    _taboola.push({
+        home: 'auto',
+        url: ''
+    });
+
+      _taboola.push({
+             mode: 'alternating-widget-1x2',
+             container: 'taboola_mid_article',
+             placement: 'Mid Article',
+             target_type: 'mix'
+         });
+
+     _taboola.push({
+             mode: 'alternating-widget-without-video-1x4',
+             container: 'taboola_below_article',
+             placement: 'Below Article',
+             target_type: 'mix'
+         });
+
+    _taboola["mobile"] = [];
+    _taboola["mobile"].push({
+        lazyFetch:true,
+        // run sdkless when testing the js on a browser (no sdk) (optional)
+        allow_sdkless_load:false,
+
+        // set view id in order to prevent duplicated between different placements (optional)
+        taboola_view_id:new Date().getTime(),
+
+        // override publisher from script url
+        publisher:"sdk-tester-demo"
+    });
+
+    _taboola.push({
+        flush: true
+    });
+
+
+</script>
+
+</body>
+
+</html>

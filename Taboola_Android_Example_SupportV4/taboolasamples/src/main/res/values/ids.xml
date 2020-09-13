@@ -1,0 +1,23 @@
+<resources>
+    <item name="api_view_thumbnail" type="id" />
+    <item name="api_view_title" type="id" />
+    <item name="api_view_branding" type="id" />
+    <item name="api_view_description" type="id" />
+    <item name="api_4_items_widget" type="id" />
+    <item name="api_feed" type="id" />
+    <item name="js_split" type="id" />
+    <item name="js_mid_article_with_feed" type="id" />
+    <item name="std_mid_article_with_feed_lnr" type="id" />
+    <item name="std_mid_article_with_feed_lv" type="id" />
+    <item name="std_mid_article_with_feed_rv" type="id" />
+    <item name="std_mid_article_with_feed_rv_manual" type="id" />
+    <item name="std_view_pager" type="id" />
+    <item name="js_view_pager" type="id" />
+    <item name="std_widget_xml" type="id" />
+    <item name="std_widget_oc_click" type="id"/>
+    <item name="std_widget_preload" type="id"/>
+    <item name="std_feed_pull_to_refresh" type="id"/>
+    <item name="std_feed_lazy_loading_rv" type="id" />
+    <item name="std_mid_article_with_feed_dark_mode_rv" type="id" />
+
+</resources>
